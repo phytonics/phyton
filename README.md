@@ -1,2 +1,2 @@
 # phyton
-A physics library on python
+A physics library based on Python.
