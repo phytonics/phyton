@@ -19,7 +19,7 @@ class Vector:
             self.vec.append(i)
 
         self.vec = self.vec[::-1]
-        
+
         if len(args) >= 1: self.x = args[0]
         else: self.x = 0
         if len(args) >= 2: self.y = args[1]
@@ -39,8 +39,8 @@ class SpatialVector(Vector):
         self.ndim = 3
         if SpatialVector in inspect(type(x)): super().__init__(self, x.x, x.y, x.z)
         else: super().__init__(x, y, z)
-        
-    
+
+
     @property
     def magnitude(self):
         return sqrt(self.x**2+self.y**2+self.z**2)
@@ -81,21 +81,21 @@ class SpatialVector(Vector):
     def __ne__(self, other): return not (self == other)
 
     def __bool__(self): return self.magnitude != 0
-        
+
     def __add__(self, vec): return self.__class__(self.x+vec.x, self.y+vec.y, self.z+vec.z)
     def __iadd__(self, vec):
         self.x += vec.x
         self.y += vec.y
         self.z += vec.z
         return self
-    
+
     def __sub__(self, vec): return self.__class__(self.x-vec.x, self.y-vec.y, self.z-vec.z)
     def __isub__(self, vec):
         self.x -= vec.x
         self.y -= vec.y
         self.z -= vec.z
         return self
-    
+
     def distance(self, vec): return sqrt((self.x-vec.x)**2 + (self.y-vec.y)**2 + (self.z-vec.z)**2)
     def anglebw(self, vec): return acos(self.dot(vec)/(self.magnitude*vec.magnitude))
     def dot(self, vec): return self.x*vec.x + self.y*vec.y + self.z*vec.z
@@ -144,7 +144,7 @@ class SpatialVector(Vector):
     @staticmethod
     def zero():
         return self.__class__(0)
-    
+
 
 i = SpatialVector(1)
 j = SpatialVector(0, 1)
@@ -179,8 +179,8 @@ class BaseScalarClass:
     def __str__(self): return f"{self.value} {self.unit}"
     def __repr__(self): return str(self)
     def __float__(self): return self.value
-        
-    
+
+
 
 class Time(BaseScalarClass): unit = s
 class Mass(BaseScalarClass):
@@ -195,7 +195,7 @@ class Inertia(BaseScalarClass):
         super().__init__(β * float(mass) * radius.magnitude)
 
 class Energy(BaseScalarClass): unit = J
-        
+
 class Power(BaseScalarClass):
     unit = W
     def __mul__(self, other):
@@ -212,7 +212,7 @@ class SpecificEnergy(BaseScalarClass):
 
 class Displacement(BaseVectorClass):
     unit = m
-    
+
     def __mul__(self, other):
         if type(other) in [int, float]: return Displacement(self.x*other, self.y*other, self.z*other)
         cross = (self.y*other.z-self.z*other.y, self.z*other.x-self.x*other.z, self.x*other.y-self.y*other.x)
@@ -251,14 +251,14 @@ class Velocity(BaseVectorClass):
 
 class Acceleration(BaseVectorClass):
     unit = m/(s**2)
-    
+
     def __mul__(self, other):
         if type(other) == Time: return Velocity(self.x*float(other), self.y*float(other), self.z*float(other))
         if type(other) == Mass:
             return Force(self.x*float(other), self.y*float(other), self.z*float(other))
         #dot = self.x*other.x + self.y*other.y + self.z*other.z
         #cross = (self.y*other.z-self.z*other.y, self.z*other.x-self.x*other.z, self.x*other.y-self.y*other.x)
-    
+
     def __rmul__(self, other):
         if type(other) == Time: return Velocity(self.x*other, self.y*other, self.z*other)
         if type(other) == Mass: return Force(self.x*float(other), self.y*float(other), self.z*float(other))
