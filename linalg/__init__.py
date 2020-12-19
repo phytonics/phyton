@@ -75,3 +75,6 @@ class SpatialVector:
 
     def __div__(self, other):
         if _check(other, SpatialVector):
+            if self.x / other.x == self.y / other.y == self.z / other.z:
+                return self.x / other.x
+            
