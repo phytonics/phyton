@@ -8,9 +8,7 @@ def _check(obj, cls):
 def _mag(*args):
     return sqrt(sum([i**2 for i in args]))
 
-class Scalar(complex):
-    def mag(self):
-        return _mag(self.real, self.imag)
+class Scalar(double): pass
 
 def _convert(value):
     if type(value) == Scalar: return value
@@ -77,4 +75,7 @@ class SpatialVector:
         if _check(other, SpatialVector):
             if self.x / other.x == self.y / other.y == self.z / other.z:
                 return self.x / other.x
-            
+            else: return
+
+        if _check(other, Scalar):
+            return SpatialVector(self.x / other, self.y / other, self.z / other)
