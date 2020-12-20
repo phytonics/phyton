@@ -7,7 +7,7 @@ from math import *
 
 # Math
 δ = feigenbaum = Quantity(4.669201609102990671853203820466, (m/m), "First Feigenbaum Constant")
-α = feigenbaum_alpha = Quantity(2.502907875095892822283902873218, (m/m), "Feigenbaum's Alpha Constant")
+α_f = feigenbaum_alpha = Quantity(2.502907875095892822283902873218, (m/m), "Feigenbaum's Alpha Constant")
 
 
 # Chem
@@ -23,7 +23,7 @@ D_d = Quantity(1, (cm**2)/s, 'Diffusivity Coefficient')
 
 # Speeds
 c = Quantity(299792458, m/s, 'Speed of Light')
-v_s = Quantity(340.0, m/s, 'Speed of Sound')
+mach = Quantity(340.0, m/s, 'Speed of Sound')
 
 # Gravitation and Cosmology
 G = Quantity(6.6743015e-11, (N*m**2)/(kg**2), 'Universal Gravitational Constant')
@@ -164,16 +164,19 @@ def gfs(φ=Quantity(45, deg)):
     if type(φ) == Quantity: φ = φ.val * (180/pi if φ.unit == rad else 1)
     return Quantity(9.806 - 0.5*(9.832-9.780)*cos(2*φ*pi/180), m/(s**2), name=f"Gravitational Field Strength on Earth (at φ = {φ}°)")
 
-
+def multiplier(n):
+    return lambda multiple=1: multiple * n
 
 
 # Fill up
-g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant')
+g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant').addvalue(9.80, 'SJPO g Constant').addvalue(10, 'Secondary School g Constant')
 g.addvalue(9.832, 'Gravitational Field Strength at poles').addvalue(9.806, 'Gravitational Field Strength at φ = 45°').addvalue(9.780, 'Gravitational Field Strength at equator')
 g.setfunc(gfs)
 k.addvalue(1/(4*pi*ε0), '1/4πε0').addvalue(9e9, 'AP Constant')
 kB.addvalue(R/NA, "R/A")
 κ.addvalue(8*pi*G/(c**4), "8πG/c^4")
 ε0.addvalue(1/(4*pi*k), '1/4πk')
-e.setfunc(lambda multiple=1: multiple*e)
-c.setfunc(lambda multiple=1: multiple*c)
+c.addvalue(3.0e8, "Approximated Speed of Light")
+e.setfunc(multiplier(e))
+c.setfunc(multiplier(c))
+mach.setfunc(multiplier(mach))
