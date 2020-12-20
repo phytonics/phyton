@@ -1,6 +1,8 @@
 import np
 from math import *
 from inspect import getmro as inspect
+from numpy.linalg import *
+from phyton.constants import Quantity, Unit
 
 def _check(obj, cls):
     return cls in inspect(type(obj))
@@ -8,7 +10,7 @@ def _check(obj, cls):
 def _mag(*args):
     return sqrt(sum([i**2 for i in args]))
 
-class Scalar(double): pass
+class Scalar(Quantity): pass
 
 def _convert(value):
     if type(value) == Scalar: return value
@@ -16,7 +18,7 @@ def _convert(value):
 
 
 class SpatialVector:
-    def __init__(self, x = 0, y = 0, z = 0):
+    def __init__(self, x = 0, y = 0, z = 0, unit=Unit()):
         """if column:
             super().__init__(self, [[x], [y], [z]], dtype=float)
         else:
@@ -29,6 +31,7 @@ class SpatialVector:
         self.y = _convert(y)
         self.z = _convert(z)
         self.vec = (self.x, self.y, self.z)
+        self.unit = unit
 
     def dot(self, other):
         if _check(other, SpatialVector):
@@ -46,7 +49,7 @@ class SpatialVector:
 
     def angleBetween(self, other):
         if _check(other, SpatialVector):
-            return acos(self.cross(other) / (self.mag * other.mag))
+            return acos(self.dot(other) / (self.mag *  other.mag))
 
     @property
     def mag(self):
@@ -80,7 +83,47 @@ class SpatialVector:
             if self.x / other.x == self.y / other.y == self.z / other.z:
                 return self.x / other.x
             else:
+                """
+                |u x v| = |u||v|sin(theta)
+                """
+                A = np.array([
+                    [0, -other.z, -other.y],
+                    [other.z, 0, other.x],
+                    [-other.y, other.x, 0]
+                ])
+
+                if not det(A):
+                    return
+
+                b = np.array([self.x, self.y, self.z])
+
+                return SpatialVector(*A.inv().dot(b))
 
 
-        if _check(other, Scalar):
-            return SpatialVector(self.x / other, self.y / other, self.z / other)
+        other = _convert(other)
+        return SpatialVector(self.x / other, self.y / other, self.z / other)
+
+    def __rdiv__(self, other):
+        if _check(other, SpatialVector):
+            if other.x / self.x == other.y / self.y == other.z / self.z:
+                return other.x / self.x
+            else:
+                """
+                |u x v| = |u||v|sin(theta)
+                """
+                A = np.array([
+                    [0, -self.z, -self.y],
+                    [self.z, 0, self.x],
+                    [-self.y, self.x, 0]
+                ])
+
+                if not det(A):
+                    return
+
+                b = np.array([other.x, other.y, other.z])
+
+                return SpatialVector(*A.inv().dot(b))
+
+
+        other = _convert(other)
+        return SpatialVector(self.x / other, self.y / other, self.z / other)
