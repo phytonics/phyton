@@ -12,9 +12,9 @@ class Quantity:
     def __init__(self, value, unit=Unit(), name=''):
         if type(unit) == Quantity: unit = Unit(unit=unit.unit.unit, unitname=unit.unit.unitname, unitfunc=unit.unit.unitfunc, mul=unit.unit.mul*unit.value, add=unit.unit.add)
         elif type(unit) != Unit: unit = Unit(unit)
-        
+
         if type(value) == Quantity: value = value.value;
-        
+
         self.val, self.value = (float(value) * unit.mul) + unit.add, value
         self.unit = unit
         self.name = str(name)
