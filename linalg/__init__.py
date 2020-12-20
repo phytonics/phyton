@@ -12,9 +12,9 @@ def _mag(*args):
 
 class Scalar(Quantity): pass
 
-def _convert(value):
-    if type(value) == Scalar: return value
-    else: return Scalar(value)
+def _convert(value, unit=Unit()):
+    if type(value) == Scalar: return Scalar(value, unit)
+    else: return Scalar(value, unit)
 
 
 class SpatialVector:
@@ -95,7 +95,7 @@ class SpatialVector:
                 if not det(A):
                     return
 
-                b = np.array([self.x, self.y, self.z])
+                b = np.array(self.vec)
 
                 return SpatialVector(*A.inv().dot(b))
 
@@ -120,7 +120,7 @@ class SpatialVector:
                 if not det(A):
                     return
 
-                b = np.array([other.x, other.y, other.z])
+                b = np.array(other.vec)
 
                 return SpatialVector(*A.inv().dot(b))
 
