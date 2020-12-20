@@ -2,15 +2,14 @@ import np
 from math import *
 from inspect import getmro as inspect
 from numpy.linalg import *
-from phyton.constants import Quantity, Unit
+from phyton.constants import Quantity as Scalar
+from phyton.constants import Unit
 
 def _check(obj, cls):
     return cls in inspect(type(obj))
 
 def _mag(*args):
     return sqrt(sum([i**2 for i in args]))
-
-class Scalar(Quantity): pass
 
 def _convert(value, unit=Unit()):
     if type(value) == Scalar: return Scalar(value, unit)
