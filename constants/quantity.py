@@ -21,13 +21,13 @@ class Quantity:
         self.vals = []
         self.func = None
 
-    def __str__(self): return f"{self.val}" + bool(self.unit)*f" {self.unit}"
+    def __str__(self): return (f"{self.val}" + bool(self.unit)*f" {self.unit}").strip()
     def __repr__(self):
         s = bool(self.name)*f"{self.name} = " + str(self)
         for i in self.vals:
             s += '\n'+(f'%{len(self.name)}s' % i[-1])*bool(self.name) + f' = {i[0]}'
             #s += '\n'+' '*(bool(self.name)*len(f"{self.name}")) + bool(self.name)*' = '+str(i)
-        return s
+        return s.strip()
 
     def __add__(self, other):
         if _isnumeric(other):
