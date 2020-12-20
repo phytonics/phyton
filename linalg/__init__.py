@@ -21,7 +21,7 @@ class SpatialVector:
             super().__init__(self, [[x], [y], [z]], dtype=float)
         else:
             super().__init__(self, [x, y, z], dtype=float)
-        
+
         self.column = column
         self.row = not row """
 
@@ -43,6 +43,10 @@ class SpatialVector:
                 self.x * other.y - self.y * other.x
             )
         else: return
+
+    def angleBetween(self, other):
+        if _check(other, SpatialVector):
+            return acos(self.cross(other) / (self.mag * other.mag))
 
     @property
     def mag(self):
@@ -75,7 +79,8 @@ class SpatialVector:
         if _check(other, SpatialVector):
             if self.x / other.x == self.y / other.y == self.z / other.z:
                 return self.x / other.x
-            else: return
+            else:
+
 
         if _check(other, Scalar):
             return SpatialVector(self.x / other, self.y / other, self.z / other)
