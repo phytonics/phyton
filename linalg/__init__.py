@@ -108,8 +108,9 @@ class SpatialVector:
 
     def __rtruediv__(self, other):
         if _check(other, SpatialVector):
-            if other.x / self.x == other.y / self.y == other.z / self.z:
-                return other.x / self.x
+            if self.x.value != 0 and self.y.value != 0 and self.z.value != 0:
+                if other.x / self.x == other.y / self.y == other.z / self.z:
+                    return other.x / self.x
             else:
 
 
