@@ -118,3 +118,7 @@ class SpatialVector:
     def __eq__(self, other):
         if _check(other, SpatialVector):
             return self.x.value == other.x.value and self.y.value == other.y.value and self.z.value == other.z.value and self.unit == other.unit
+        
+    def __ne__(self, other):
+        return not self == other
+    
