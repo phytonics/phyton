@@ -87,7 +87,7 @@ class SpatialVector:
 
     def __sub__(self, other):
         if _check(other, SpatialVector):
-            return SpatialVector(self.x - other.x, self.y - other.y, self.z - other.z)
+            return SpatialVector(self.x.value - other.x.value, self.y.value - other.y.value, self.z.value - other.z.value)
         else: return
 
     def __rsub__(self, other):
