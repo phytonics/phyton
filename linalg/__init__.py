@@ -16,7 +16,7 @@ def _convert(value, unit=Unit()):
     else: return Scalar(value, unit)
     
     
-def _divCross(self, other):
+def _divCross(other, self):
     """
     |u x v| = |u||v|sin(theta)
     """
