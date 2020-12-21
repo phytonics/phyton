@@ -40,9 +40,9 @@ class SpatialVector:
     def cross(self, other):
         if _check(other, SpatialVector):
             return SpatialVector(
-                self.y * other.z - self.z * other.y,
-                self.z * other.x - self.x * other.z,
-                self.x * other.y - self.y * other.x
+                self.y.value * other.z.value - self.z.value * other.y.value,
+                self.z.value * other.x.value - self.x.value * other.z.value,
+                self.x.value * other.y.value - self.y.value * other.x.value
             )
         else: return
 
