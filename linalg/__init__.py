@@ -97,26 +97,9 @@ class SpatialVector:
 
     def __truediv__(self, other):
         if _check(other, SpatialVector):
-            if self.x.value == self.y.value == self.z.value == 0: return True
-            elif self.x.value == 0 or self.y.value == 0 or self.z.value == 0: return False
-            elif 
-            if self.x.value / other.x.value == self.y.value / other.y.value == self.z.value / other.z.value:
-                return self.x / other.x
+            elif other.x.value != 0 and other.y.value != 0 and other.z.value != 0:
+                if self.x.value / other.x.value == self.y.value / other.y.value == self.z.value / other.z.value:return self.x / other.x
             else:
-                """
-                |u x v| = |u||v|sin(theta)
-                """
-                A = np.array([
-                    [0, -other.z, -other.y],
-                    [other.z, 0, other.x],
-                    [-other.y, other.x, 0]
-                ])
-
-                if not det(A):
-                    return
-
-                b = np.array(self.vec)
-
                 return _divCross(self, other)
 
 
