@@ -92,7 +92,7 @@ class SpatialVector:
 
     def __rsub__(self, other):
         if _check(other, SpatialVector):
-            return SpatialVector(other.x - self.x, other.y - self.y, other.z - self.z)
+            return SpatialVector(other.x.value - self.x.value, other.y.value - self.y.value, other.z.value - self.z.value)
         else: return
 
     def __truediv__(self, other):
