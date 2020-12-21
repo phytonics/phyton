@@ -9,7 +9,7 @@ def _check(obj, cls):
     return cls in inspect(type(obj))
 
 def _mag(*args):
-    return sqrt(sum([i**2 for i in args]))
+    return sum([i**2 for i in args]) ** 0.5
 
 def _convert(value, unit=Unit()):
     if type(value) == Scalar: return Scalar(value, unit)
