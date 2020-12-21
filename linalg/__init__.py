@@ -97,7 +97,7 @@ class SpatialVector:
 
     def __truediv__(self, other):
         if _check(other, SpatialVector):
-            elif other.x.value != 0 and other.y.value != 0 and other.z.value != 0:
+            if other.x.value != 0 and other.y.value != 0 and other.z.value != 0:
                 if self.x.value / other.x.value == self.y.value / other.y.value == self.z.value / other.z.value:return self.x / other.x
             else:
                 return _divCross(self, other)
