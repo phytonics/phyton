@@ -112,7 +112,7 @@ class SpatialVector:
                 if other.x / self.x == other.y / self.y == other.z / self.z:
                     return other.x / self.x
             else:
-
+                return _divCross(self, other)
 
 
         other = _convert(other)
