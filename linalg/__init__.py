@@ -64,7 +64,7 @@ class SpatialVector:
             )
         else: return
 
-    def angleBetween(self, other):
+    def angleFrom(self, other):
         if _check(other, SpatialVector):
             return acos(self.dot(other) / (self.mag *  other.mag))
 
