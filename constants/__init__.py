@@ -167,6 +167,13 @@ def gfs(φ=Quantity(45, deg)):
 def multiplier(n):
     return lambda multiple=1: multiple * n
 
+def _cFunc(times, n = 1):
+    return times * (c / n)
+
+"""
+def _machFunc(times):
+    return times * (m / n)
+"""
 
 # Fill up
 g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant').addvalue(9.80, 'SJPO g Constant').addvalue(10, 'Secondary School g Constant')
@@ -177,6 +184,7 @@ kB.addvalue(R/NA, "R/A")
 κ.addvalue(8*pi*G/(c**4), "8πG/c^4")
 ε0.addvalue(1/(4*pi*k), '1/4πk')
 c.addvalue(3.0e8, "Approximated Speed of Light")
+mach.addvalue(331, "Speed of Sound at 0℃").addvalue(343, "Speed of Sound at 20℃")
 e.setfunc(multiplier(e))
-c.setfunc(multiplier(c))
+c.setfunc(_cFunc)
 mach.setfunc(multiplier(mach))
