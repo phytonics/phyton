@@ -14,6 +14,24 @@ def _mag(*args):
 def _convert(value, unit=Unit()):
     if type(value) == Scalar: return Scalar(value, unit)
     else: return Scalar(value, unit)
+    
+    
+def _divCross(self, other):
+    """
+    |u x v| = |u||v|sin(theta)
+    """
+    A = np.array([
+        [0, -self.z, -self.y],
+        [self.z, 0, self.x],
+        [-self.y, self.x, 0]
+    ])
+
+    if not det(A):
+        return
+
+    b = np.array(other.vec)
+
+    return SpatialVector(*A.inv().dot(b))
 
 
 class SpatialVector:
@@ -79,7 +97,10 @@ class SpatialVector:
 
     def __truediv__(self, other):
         if _check(other, SpatialVector):
-            if self.x / other.x == self.y / other.y == self.z / other.z:
+            if self.x.value == self.y.value == self.z.value == 0: return True
+            elif self.x.value == 0 or self.y.value == 0 or self.z.value == 0: return False
+            elif 
+            if self.x.value / other.x.value == self.y.value / other.y.value == self.z.value / other.z.value:
                 return self.x / other.x
             else:
                 """
@@ -96,7 +117,7 @@ class SpatialVector:
 
                 b = np.array(self.vec)
 
-                return SpatialVector(*A.inv().dot(b))
+                return _divCross(self, other)
 
 
         other = _convert(other)
@@ -107,21 +128,7 @@ class SpatialVector:
             if other.x / self.x == other.y / self.y == other.z / self.z:
                 return other.x / self.x
             else:
-                """
-                |u x v| = |u||v|sin(theta)
-                """
-                A = np.array([
-                    [0, -self.z, -self.y],
-                    [self.z, 0, self.x],
-                    [-self.y, self.x, 0]
-                ])
 
-                if not det(A):
-                    return
-
-                b = np.array(other.vec)
-
-                return SpatialVector(*A.inv().dot(b))
 
 
         other = _convert(other)
