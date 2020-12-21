@@ -77,7 +77,7 @@ class SpatialVector:
             return SpatialVector(other.x - self.x, other.y - self.y, other.z - self.z)
         else: return
 
-    def __div__(self, other):
+    def __truediv__(self, other):
         if _check(other, SpatialVector):
             if self.x / other.x == self.y / other.y == self.z / other.z:
                 return self.x / other.x
@@ -102,7 +102,7 @@ class SpatialVector:
         other = _convert(other)
         return SpatialVector(self.x / other, self.y / other, self.z / other)
 
-    def __rdiv__(self, other):
+    def __rtruediv__(self, other):
         if _check(other, SpatialVector):
             if other.x / self.x == other.y / self.y == other.z / self.z:
                 return other.x / self.x
