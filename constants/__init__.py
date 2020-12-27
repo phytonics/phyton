@@ -82,7 +82,7 @@ m_e = Quantity(9.109383701528e-31, kg, 'Rest mass of electron')
 m_p = Quantity(1.6726219236951e-27, kg, 'Rest mass of proton')
 m_n = Quantity(1.6749274980495e-27, kg, 'Rest mass of neutron')
 m_α = 4.003*u
-e = qe = Quantity(1.602176634e-19, C, 'Elementary Charge')
+qe = Quantity(1.602176634e-19, C, 'Elementary Charge')
 ε0 = Quantity(8.854187812813e-12, (C**2)/(N*m**2), 'Electric constant, Vacuum Electric Permittivity')
 μ0 = Quantity(1.2566370621219e-6, T*m/A, 'Magnetic constant, Vacuum Magnetic Permeability')
 
@@ -180,6 +180,10 @@ def _machFunc(times):
 """
 
 # Fill up
+
+
+
+
 g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant').addvalue(9.80, 'SJPO g Constant').addvalue(10, 'Secondary School g Constant')
 g.addvalue(9.832, 'Gravitational Field Strength at poles').addvalue(9.806, 'Gravitational Field Strength at φ = 45°').addvalue(9.780, 'Gravitational Field Strength at equator')
 g.setfunc(gfs)
@@ -189,6 +193,6 @@ kB.addvalue(R/NA, "R/A")
 ε0.addvalue(1/(4*pi*k), '1/4πk')
 c.addvalue(3.0e8, "Approximated Speed of Light")
 mach.addvalue(331, "Speed of Sound at 0℃").addvalue(343, "Speed of Sound at 20℃")
-e.setfunc(multiplier(e))
+qe.setfunc(multiplier(e))
 c.setfunc(_cFunc)
 mach.setfunc(multiplier(mach))
