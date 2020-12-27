@@ -2,10 +2,14 @@
 from sympy import Symbol
 from phyton.constants.quantity import *
 from phyton.constants.unit import *
-from math import *
+#from math import *
+import math
 
 
 # Math
+pi = Quantity(math.pi, rad, "The PI Constant")
+e = Quantity(math.e, Unit(), "Euler's Number")
+
 δ = feigenbaum = Quantity(4.669201609102990671853203820466, (m/m), "First Feigenbaum Constant")
 α_f = feigenbaum_alpha = Quantity(2.502907875095892822283902873218, (m/m), "Feigenbaum's Alpha Constant")
 
@@ -161,8 +165,8 @@ m_τ = m_tau = Quantity(MeV(1776.82)/c**2, kg, "Mass of Tau")
 
 
 def gfs(φ=Quantity(45, deg)):
-    if type(φ) == Quantity: φ = φ.val * (180/pi if φ.unit == rad else 1)
-    return Quantity(9.806 - 0.5*(9.832-9.780)*cos(2*φ*pi/180), m/(s**2), name=f"Gravitational Field Strength on Earth (at φ = {φ}°)")
+    if type(φ) == Quantity: φ = φ.val * (180/math.pi if φ.unit == rad else 1)
+    return Quantity(9.806 - 0.5*(9.832-9.780)*math.cos(2*φ*math.pi/180), m/(s**2), name=f"Gravitational Field Strength on Earth (at φ = {φ}°)")
 
 def multiplier(n):
     return lambda multiple=1: multiple * n
