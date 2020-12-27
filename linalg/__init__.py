@@ -14,8 +14,8 @@ def _mag(*args):
 def _convert(value, unit=Unit()):
     if type(value) == Scalar: return Scalar(value, unit)
     else: return Scalar(value, unit)
-    
-    
+
+
 def _divCross(other, self):
     """
     |u x v| = |u||v|sin(theta)
