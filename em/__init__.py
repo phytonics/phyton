@@ -1,10 +1,10 @@
 #phyton.em
 from phyton.constants import *
 
-
+## Electrostatics
 class PointCharge:
     def __init__(self, multiple=1, name='', mass=kg(0)):
-        self.Q = e(multiple)
+        self.Q = qe(multiple)
         self.name = ' '.join(['Point Charge', name]) if name else 'a Point Charge'
         self.mass = mass
 
@@ -35,7 +35,7 @@ class Neutron(PointCharge):
 class Molecule(PointCharge):
     def __init__(self, p=0, n=0, e=0, name=''):
         super().__init__(p-e, name, m_p*p + m_n*n + m_e*e)
-        
+
 
 class Circuit:
     def __init__(self, *components, I=A(0)):
@@ -57,7 +57,6 @@ class Series:
         sum(c.R for c in self.components)
 
 class Parallel:
-    
     def __init__(self, *series):
         self.series = []
         for i in series:
@@ -98,7 +97,7 @@ class Component:
         else:
             self.V = self.I*self.R
             self.P = (self.I**2)*self.R
-        
+
     def time(self, t):
         return self.P*t
 
