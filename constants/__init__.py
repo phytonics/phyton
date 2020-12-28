@@ -174,14 +174,18 @@ def multiplier(n):
 def _cFunc(times, n = 1):
     return times * (c / n)
 
+def _exp(x=1, n=None):
+    euler = math.e if n is None else (1 + 1/n)**n
+    return Quantity(euler ** x)
+
 """
 def _machFunc(times):
     return times * (m / n)
 """
 
 # Fill up
-
-
+e.setFunc(_exp)
+e.exp = _exp
 
 
 g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant').addvalue(9.80, 'SJPO g Constant').addvalue(10, 'Secondary School g Constant')
