@@ -207,17 +207,27 @@ e.setFunc(_exp)
 e.exp = _exp
 
 pi.setFunc(_pi)
+pi.my = _pi
 
 
 g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant').addvalue(9.80, 'SJPO g Constant').addvalue(10, 'Secondary School g Constant')
 g.addvalue(9.832, 'Gravitational Field Strength at poles').addvalue(9.806, 'Gravitational Field Strength at φ = 45°').addvalue(9.780, 'Gravitational Field Strength at equator')
 g.setfunc(gfs)
+g.gfs = gfs
+
+
 k.addvalue(1/(4*pi*ε0), '1/4πε0').addvalue(9e9, 'AP Constant')
+
 kB.addvalue(R/NA, "R/A")
+
 κ.addvalue(8*pi*G/(c**4), "8πG/c^4")
+
 ε0.addvalue(1/(4*pi*k), '1/4πk')
+
 c.addvalue(3.0e8, "Approximated Speed of Light")
-mach.addvalue(331, "Speed of Sound at 0℃").addvalue(343, "Speed of Sound at 20℃")
-qe.setfunc(multiplier(e))
 c.setfunc(_cFunc)
+
+mach.addvalue(331, "Speed of Sound at 0℃").addvalue(343, "Speed of Sound at 20℃")
 mach.setfunc(multiplier(mach))
+
+qe.setfunc(multiplier(qe)) # Quantization of Charges
