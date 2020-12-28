@@ -149,7 +149,7 @@ Mmod = Quantity(4.73, GPa, 'Biot Modulus')
 K_cd = Quantity(683, lm/W, 'Luminous Efficacy of Monochromatic Radiation of Frequency 540 THz')
 
 
-# Fundamental Constants
+# Fundamental Constants (Courtesy of Domain of Science)
 m_p = Quantity(GeV(1.220896e19)/c**2, kg, "Planck Mass")
 m_c = Quantity(GeV(1.27)/c**2, kg, "Mass of Charm Quark")
 m_s = Quantity(MeV(101)/c**2, kg, "Mass of Strange Quark")
@@ -158,9 +158,6 @@ m_b = Quantity(GeV(4.19)/c**2, kg, "Mass of Bottom Quark")
 m_μ = m_mu = Quantity(MeV(105.658)/c**2, kg, "Mass of Muon")
 m_τ = m_tau = Quantity(MeV(1776.82)/c**2, kg, "Mass of Tau")
 α = alpha = fs = Quantity((e**2)/(hbar*c*4*pi*ε0), kg/kg, "Fine-structure constant")
-
-
-
 
 
 
