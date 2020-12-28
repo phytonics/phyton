@@ -178,10 +178,21 @@ def _exp(x=1, n=None):
     euler = math.e if n is None else (1 + 1/n)**n
     return Quantity(euler ** x)
 
-"""
-def _machFunc(times):
-    return times * (m / n)
-"""
+def _pi(iters):
+    sign = 1
+    x = 1
+    y = 0
+    series = 0
+    for i in range (iters):
+        series = series + (sign/(x * 3**y))
+        x += 2
+        y += 1
+        sign *= -1
+
+    myPi = math.sqrt(12) * series
+
+    return myPi
+
 
 # Fill up
 e.setFunc(_exp)
