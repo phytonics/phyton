@@ -200,10 +200,10 @@ def _pi(iters=None):
 
 
 # Fill up
-e.setFunc(_exp)
+e.setfunc(_exp)
 e.exp = _exp
 
-pi.setFunc(_pi)
+pi.setfunc(_pi)
 pi.my = _pi
 
 
