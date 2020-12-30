@@ -2,8 +2,6 @@ import np
 from math import *
 from inspect import getmro as inspect
 from numpy.linalg import *
-from phyton.constants import Quantity as Scalar
-from phyton.constants import Unit
 
 def _check(obj, cls):
     return cls in inspect(type(obj))
@@ -12,8 +10,8 @@ def _mag(*args):
     return sum([i**2 for i in args]) ** 0.5
 
 def _convert(value, unit=Unit()):
-    if type(value) == Scalar: return Scalar(value, unit)
-    else: return Scalar(value, unit)
+    if type(value) == Scalar: return value
+    else: return Scalar(value)
 
 
 def _divCross(other, self):
@@ -33,9 +31,9 @@ def _divCross(other, self):
 
     return SpatialVector(*A.inv().dot(b))
 
-
+class Scalar(float): pass
 class SpatialVector:
-    def __init__(self, x = 0, y = 0, z = 0, unit=Unit()):
+    def __init__(self, x = 0, y = 0, z = 0):
         """if column:
             super().__init__(self, [[x], [y], [z]], dtype=float)
         else:
@@ -48,7 +46,6 @@ class SpatialVector:
         self.y = _convert(y)
         self.z = _convert(z)
         self.vec = (self.x, self.y, self.z)
-        self.unit = unit
 
     def dot(self, other):
         if _check(other, SpatialVector):
@@ -113,12 +110,14 @@ class SpatialVector:
                     return other.x / self.x
             return _divCross(other, self)
 
-        return
-    
+        return 0
+
     def __eq__(self, other):
         if _check(other, SpatialVector):
             return self.x.value == other.x.value and self.y.value == other.y.value and self.z.value == other.z.value and self.unit == other.unit
-        
+
     def __ne__(self, other):
         return not self == other
-    
+
+    def __float__(self):
+        return self
