@@ -175,14 +175,14 @@ def _exp(x=1, n=None):
     euler = math.e if n is None else (1 + 1/n)**n
     return Quantity(euler ** x)
 
-def _pi(iters=None):
+def _pi(d=1, iters=None):
     if iters is None:
-        return pi;
+        return pi*d;
 
     try:
         iters = int(iters)
     except:
-        return pi;
+        return pi * d;
 
     sign = 1
     x = 1
@@ -196,7 +196,7 @@ def _pi(iters=None):
 
     myPi = math.sqrt(12) * series
 
-    return Quantity(myPi, rad)
+    return Quantity(myPi, rad) * d
 
 
 # Fill up
