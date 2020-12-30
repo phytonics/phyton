@@ -14,6 +14,3 @@ Symbol('ω')
 class Variable(Symbol):
     def __init__(self, sym, eqdict):
         super().__init__(sym)
-
-    def __getitem__(self, key):
- 
