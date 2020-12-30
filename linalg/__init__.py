@@ -96,6 +96,7 @@ class SpatialVector:
         if _check(other, SpatialVector):
             if other.x != 0 and other.y != 0 and other.z != 0:
                 if self.x / other.x == self.y / other.y == self.z / other.z: return self.x / other.x
+                else: return _divCross(self, other)
             else:
                 return _divCross(self, other)
 
@@ -103,6 +104,7 @@ class SpatialVector:
         other = _convert(other)
         return SpatialVector(self.x / other, self.y / other, self.z / other)
 
+    """
     def __rtruediv__(self, other):
         if _check(other, SpatialVector):
             if self.x != 0 and self.y != 0 and self.z != 0:
@@ -111,6 +113,7 @@ class SpatialVector:
             return _divCross(other, self)
 
         return 0
+    """
 
     def __eq__(self, other):
         if _check(other, SpatialVector):
