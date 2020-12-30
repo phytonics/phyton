@@ -14,20 +14,20 @@ def _convert(value):
     else: return Scalar(value)
 
 
-def _divCross(other, self):
+def _divCross(self, other):
     """
     |u x v| = |u||v|sin(theta)
     """
     A = np.array([
-        [0, -self.z, -self.y],
-        [self.z, 0, self.x],
-        [-self.y, self.x, 0]
+        [0, -other.z, -other.y],
+        [other.z, 0, other.x],
+        [-other.y, other.x, 0]
     ])
 
     if not det(A):
         return SpatialVector()
 
-    b = np.array(other.vec)
+    b = np.array(self.vec)
 
     return SpatialVector(*A.inv().dot(b))
 
@@ -68,6 +68,10 @@ class SpatialVector:
     @property
     def mag(self):
         return _mag(*self.vec)
+
+    @property
+    def unitVector(self):
+        return self / self.mag
 
     def __repr__(self):
         return f"SpatialVector({self.x}, {self.y}, {self.z})"
