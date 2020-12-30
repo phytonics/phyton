@@ -2,6 +2,7 @@ import np
 from math import *
 from inspect import getmro as inspect
 from numpy.linalg import *
+from phyton.constants import Quantity
 
 def _check(obj, cls):
     return cls in inspect(type(obj))
@@ -50,7 +51,7 @@ class SpatialVector:
     def dot(self, other):
         if _check(other, SpatialVector):
             return self.x * other.x + self.y * other.y + self.z * other.z
-        else: return
+        else: return self * other
 
     def cross(self, other):
         if _check(other, SpatialVector):
@@ -59,7 +60,7 @@ class SpatialVector:
                 self.z * other.x - self.x * other.z,
                 self.x * other.y - self.y * other.x
             )
-        else: return
+        else: return self * other
 
     def angleFrom(self, other):
         if _check(other, SpatialVector):
