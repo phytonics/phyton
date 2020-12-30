@@ -100,9 +100,9 @@ class SpatialVector:
             else:
                 return _divCross(self, other)
 
-
-        other = _convert(other)
-        return SpatialVector(self.x / other, self.y / other, self.z / other)
+        else:
+            other = _convert(other)
+            return SpatialVector(self.x / other, self.y / other, self.z / other)
 
     """
     def __rtruediv__(self, other):
