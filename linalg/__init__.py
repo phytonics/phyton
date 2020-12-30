@@ -25,7 +25,7 @@ def _divCross(other, self):
     ])
 
     if not det(A):
-        return
+        return SpatialVector()
 
     b = np.array(other.vec)
 
