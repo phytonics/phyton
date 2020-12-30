@@ -13,4 +13,23 @@ a, e, i = 0
 
 other.z(other.x * other.y) - other.y(other.x * other.z) = 0
 
-Therefore, this divisionCross does not work.
+Therefore, this divCross does not work.
+
+
+code:
+def _divCross(self, other):
+    """
+    |u x v| = |u||v|sin(theta)
+    """
+    A = np.array([
+        [0, -other.z, -other.y],
+        [other.z, 0, other.x],
+        [-other.y, other.x, 0]
+    ])
+
+    if not det(A):
+        return SpatialVector()
+
+    b = np.array(self.vec)
+
+    return SpatialVector(*A.inv().dot(b))
