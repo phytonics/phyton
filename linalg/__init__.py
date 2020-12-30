@@ -100,7 +100,7 @@ class SpatialVector:
         if _check(other, SpatialVector):
             if other.x != 0 and other.y != 0 and other.z != 0:
                 if self.x / other.x == self.y / other.y == self.z / other.z: return self.x / other.x
-                else: return _divCross(self, other)
+                else: return _divCross(self, other) #doesn't work, see Proof.
             else:
                 return _divCross(self, other)
 
