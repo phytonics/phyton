@@ -55,9 +55,9 @@ class SpatialVector:
     def cross(self, other):
         if _check(other, SpatialVector):
             return SpatialVector(
-                self.y.value * other.z.value - self.z.value * other.y.value,
-                self.z.value * other.x.value - self.x.value * other.z.value,
-                self.x.value * other.y.value - self.y.value * other.x.value
+                self.y * other.z - self.z * other.y,
+                self.z * other.x - self.x * other.z,
+                self.x * other.y - self.y * other.x
             )
         else: return
 
@@ -74,28 +74,28 @@ class SpatialVector:
 
     def __add__(self, other):
         if _check(other, SpatialVector):
-            return SpatialVector(self.x.value + other.x.value, self.y.value + other.y.value, self.z.value + other.z.value)
+            return SpatialVector(self.x + other.x, self.y + other.y, self.z + other.z)
         else: return
 
     def __radd__(self, other):
         if _check(other, SpatialVector):
-            return SpatialVector(self.x.value + other.x.value, self.y.value + other.y.value, self.z.value + other.z.value)
+            return SpatialVector(self.x + other.x , self.y + other.y , self.z + other.z.value)
         else: return
 
     def __sub__(self, other):
         if _check(other, SpatialVector):
-            return SpatialVector(self.x.value - other.x.value, self.y.value - other.y.value, self.z.value - other.z.value)
+            return SpatialVector(self.x - other.x , self.y - other.y , self.z - other.z.value)
         else: return
 
     def __rsub__(self, other):
         if _check(other, SpatialVector):
-            return SpatialVector(other.x.value - self.x.value, other.y.value - self.y.value, other.z.value - self.z.value)
+            return SpatialVector(other.x - self.x , other.y - self.y , other.z - self.z.value)
         else: return
 
     def __truediv__(self, other):
         if _check(other, SpatialVector):
-            if other.x.value != 0 and other.y.value != 0 and other.z.value != 0:
-                if self.x.value / other.x.value == self.y.value / other.y.value == self.z.value / other.z.value:return self.x / other.x
+            if other.x != 0 and other.y != 0 and other.z != 0:
+                if self.x / other.x == self.y / other.y == self.z / other.z.value:return self.x / other.x
             else:
                 return _divCross(self, other)
 
@@ -105,7 +105,7 @@ class SpatialVector:
 
     def __rtruediv__(self, other):
         if _check(other, SpatialVector):
-            if self.x.value != 0 and self.y.value != 0 and self.z.value != 0:
+            if self.x != 0 and self.y != 0 and self.z != 0:
                 if other.x / self.x == other.y / self.y == other.z / self.z:
                     return other.x / self.x
             return _divCross(other, self)
@@ -114,7 +114,7 @@ class SpatialVector:
 
     def __eq__(self, other):
         if _check(other, SpatialVector):
-            return self.x.value == other.x.value and self.y.value == other.y.value and self.z.value == other.z.value
+            return self.x == other.x and self.y == other.y and self.z == other.z.value
 
     def __ne__(self, other):
         return not self == other
