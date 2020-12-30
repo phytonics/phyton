@@ -1,3 +1,4 @@
+"""
 self, other
 
 self = (-2, -1, 3)
@@ -14,9 +15,9 @@ a, e, i = 0
 other.z(other.x * other.y) - other.y(other.x * other.z) = 0
 
 Therefore, this divCross does not work.
+"""
 
-
-code:
+# code:
 def _divCross(self, other):
     """
     |u x v| = |u||v|sin(theta)
