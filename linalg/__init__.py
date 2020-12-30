@@ -9,7 +9,7 @@ def _check(obj, cls):
 def _mag(*args):
     return sum([i**2 for i in args]) ** 0.5
 
-def _convert(value, unit=Unit()):
+def _convert(value):
     if type(value) == Scalar: return value
     else: return Scalar(value)
 
@@ -114,7 +114,7 @@ class SpatialVector:
 
     def __eq__(self, other):
         if _check(other, SpatialVector):
-            return self.x.value == other.x.value and self.y.value == other.y.value and self.z.value == other.z.value and self.unit == other.unit
+            return self.x.value == other.x.value and self.y.value == other.y.value and self.z.value == other.z.value
 
     def __ne__(self, other):
         return not self == other
