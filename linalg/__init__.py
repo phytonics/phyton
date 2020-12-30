@@ -10,7 +10,7 @@ def _check(obj, cls):
 def _mag(*args):
     return sum([i**2 for i in args]) ** 0.5
 
-def _convert(value):
+def convert(value):
     if type(value) == SpatialVector or type(value) == Scalar: return value
     else: return Scalar(value)
 
@@ -27,9 +27,9 @@ class SpatialVector:
         self.column = column
         self.row = not row """
 
-        self.x = _convert(x)
-        self.y = _convert(y)
-        self.z = _convert(z)
+        self.x = convert(x)
+        self.y = convert(y)
+        self.z = convert(z)
         self.vec = (self.x, self.y, self.z)
 
     def dot(self, other):
@@ -90,7 +90,7 @@ class SpatialVector:
             else: return SpatialVector(self.x / other.mag, self.y / other.mag, self.z / other.mag)
 
         else:
-            other = _convert(other)
+            other = convert(other)
             return SpatialVector(self.x / other, self.y / other, self.z / other)
 
     def __eq__(self, other):
