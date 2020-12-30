@@ -3,6 +3,7 @@
 from phyton.constants.unit import *
 from math import *
 from inspect import getmro as inspect
+import np
 
 def _check(obj, cls):
     return cls in inspect(type(obj))
