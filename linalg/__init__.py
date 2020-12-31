@@ -4,7 +4,7 @@ from inspect import getmro as inspect
 from numpy.linalg import *
 from phyton.constants import rad
 
-def _check(obj, cls):
+def check(obj, cls):
     return cls in inspect(type(obj))
 
 def _mag(*args):
@@ -33,12 +33,12 @@ class SpatialVector:
         self.vec = (self.x, self.y, self.z)
 
     def dot(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return self.x * other.x + self.y * other.y + self.z * other.z
         else: return self * other
 
     def cross(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return SpatialVector(
                 self.y * other.z - self.z * other.y,
                 self.z * other.x - self.x * other.z,
@@ -47,7 +47,7 @@ class SpatialVector:
         else: return self * other
 
     def angleFrom(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return rad(acos(self.dot(other) / (self.mag *  other.mag)))
 
     @property
@@ -65,27 +65,27 @@ class SpatialVector:
         return f"({self.x}, {self.y}, {self.z})"
 
     def __add__(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return SpatialVector(self.x + other.x, self.y + other.y, self.z + other.z)
         else: return self
 
     def __radd__(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return SpatialVector(self.x + other.x , self.y + other.y , self.z + other.z)
         else: return self
 
     def __sub__(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return SpatialVector(self.x - other.x , self.y - other.y , self.z - other.z)
         else: return self
 
     def __rsub__(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return SpatialVector(other.x - self.x , other.y - self.y , other.z - self.z)
         else: return self
 
     def __truediv__(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             if other.x != 0 and other.y != 0 and other.z != 0:
                 if self.x / other.x == self.y / other.y == self.z / other.z: return self.x / other.x
                 else: return SpatialVector(self.x / other.mag, self.y / other.mag, self.z / other.mag)
@@ -97,7 +97,7 @@ class SpatialVector:
             return SpatialVector(self.x / other, self.y / other, self.z / other)
 
     def __eq__(self, other):
-        if _check(other, SpatialVector):
+        if check(other, SpatialVector):
             return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __ne__(self, other):
