@@ -7,17 +7,17 @@ from phyton.constants import rad
 def check(obj, cls):
     return cls in inspect(type(obj))
 
+def isnumeric(val):
+    if type(val) in [np.generic, int, float, complex]: return True
+    try: return bool(set(inspect(val)) & set([np.generic, int, float, complex]))
+    except: return False
+
 def _mag(*args):
     return sum([i**2 for i in args]) ** 0.5
 
 def convert(value):
     if type(value) == SpatialVector or type(value) == _Scalar: return value
     elif isnumeric(value): return _Scalar(value)
-
-def isnumeric(val):
-    if type(val) in [np.generic, int, float, complex]: return True
-    try: return bool(set(inspect(val)) & set([np.generic, int, float, complex]))
-    except: return False
 
 class _Scalar(float): pass
 
