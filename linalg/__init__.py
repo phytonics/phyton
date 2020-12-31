@@ -1,7 +1,6 @@
 import np
 from math import *
 from inspect import getmro as inspect
-from numpy.linalg import *
 from phyton.constants import rad
 
 def check(obj, cls):
@@ -9,7 +8,7 @@ def check(obj, cls):
 
 def isnumeric(val):
     if type(val) in [np.generic, int, float, complex]: return True
-    try: return bool(set(inspect(val)) & set([np.generic, int, float, complex]))
+    try: return bool(set(inspect(type(val))) & set([np.generic, int, float, complex]))
     except: return False
 
 def _mag(*args):
