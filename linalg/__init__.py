@@ -12,7 +12,12 @@ def _mag(*args):
 
 def convert(value):
     if type(value) == SpatialVector or type(value) == _Scalar: return value
-    else: return _Scalar(value)
+    elif isnumeric(value): return _Scalar(value)
+
+def isnumeric(val):
+    if type(val) in [np.generic, int, float, complex]: return True
+    try: return bool(set(inspect(val)) & set([np.generic, int, float, complex]))
+    except: return False
 
 class _Scalar(float): pass
 
