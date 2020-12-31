@@ -99,6 +99,3 @@ class SpatialVector:
 
     def __ne__(self, other):
         return not self == other
-
-    def __float__(self):
-        return self
