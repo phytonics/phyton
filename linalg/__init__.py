@@ -11,10 +11,10 @@ def _mag(*args):
     return sum([i**2 for i in args]) ** 0.5
 
 def convert(value):
-    if type(value) == SpatialVector or type(value) == Scalar: return value
-    else: return Scalar(value)
+    if type(value) == SpatialVector or type(value) == _Scalar: return value
+    else: return _Scalar(value)
 
-class Scalar(float): pass
+class _Scalar(float): pass
 
 
 class SpatialVector:
