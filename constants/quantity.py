@@ -6,14 +6,6 @@ from inspect import getmro as inspect
 import np
 from phyton.linalg import *
 
-def check(obj, cls):
-    return cls in inspect(type(obj))
-
-def isnumeric(val):
-    if type(val) in [np.generic, int, float, complex]: return True
-    try: return bool(set(inspect(val)) & set([np.generic, int, float, complex]))
-    except: return False
-
 class Quantity:
     def __init__(self, value, unit=Unit(), name=''):
         if type(unit) == Quantity: unit = Unit(unit=unit.unit.unit, unitname=unit.unit.unitname, unitfunc=unit.unit.unitfunc, mul=unit.unit.mul*unit.value, add=unit.unit.add)
@@ -21,7 +13,7 @@ class Quantity:
 
         if type(value) == Quantity: value = value.value;
 
-        self.val, self.value = (float(value) * unit.mul) + unit.add, value
+        self.val, self.value = (convert(value) * unit.mul) + unit.add, value
         self.unit = unit
         self.name = str(name)
         self.vals = []
@@ -37,54 +29,54 @@ class Quantity:
 
     def __add__(self, other):
         if isnumeric(other):
-            return Quantity(self.value+float(other), self.unit)
+            return Quantity(self.value+convert(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value+other.value, self.unit + other.unit)
 
     def __radd__(self, other):
         if isnumeric(other):
-            return Quantity(self.value+float(other), self.unit)
+            return Quantity(self.value+convert(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value+other.value, self.unit + other.unit)
 
     def __sub__(self, other):
         if isnumeric(other):
-            return Quantity(self.value-float(other), self.unit)
+            return Quantity(self.value-convert(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value-other.value, self.unit - other.unit)
 
     def __rsub__(self, other):
         if isnumeric(other):
-            return Quantity(float(other)-self.value, self.unit)
+            return Quantity(convert(other)-self.value, self.unit)
         if check(other, Quantity):
             return Quantity(other.value-self.value, other.unit-self.unit)
 
     def __mul__(self, other):
         if isnumeric(other):
-            return Quantity(self.value*float(other), self.unit)
+            return Quantity(self.value*convert(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value*other.value, self.unit*other.unit)
 
     def __rmul__(self, other):
         if isnumeric(other):
-            return Quantity(self.value*float(other), self.unit)
+            return Quantity(self.value*convert(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value*other.value, self.unit*other.unit)
 
     def __truediv__(self, other):
         if isnumeric(other):
-            return Quantity(self.value/float(other), self.unit)
+            return Quantity(self.value/convert(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value/other.value, self.unit/other.unit)
 
     def __rtruediv__(self, other):
         if isnumeric(other):
-            return Quantity(float(other)/self.value, 1/self.unit)
+            return Quantity(convert(other)/self.value, 1/self.unit)
         if check(other, Quantity):
             return Quantity(other.value/self.value, other.unit/self.unit)
 
     def __pow__(self, other):
-        return Quantity(self.value**float(other), self.unit**other)
+        return Quantity(self.value**convert(other), self.unit**other)
 
     def addvalue(self, val, name=''):
         if isnumeric(val):
