@@ -4,6 +4,7 @@ from phyton.constants.unit import *
 from math import *
 from inspect import getmro as inspect
 import np
+from phyton.linalg import *
 
 def check(obj, cls):
     return cls in inspect(type(obj))
