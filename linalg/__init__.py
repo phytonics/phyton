@@ -61,6 +61,9 @@ class SpatialVector:
     def __repr__(self):
         return f"SpatialVector({self.x}, {self.y}, {self.z})"
 
+    def __str__(self):
+        return f"({self.x}, {self.y}, {self.z})"
+
     def __add__(self, other):
         if _check(other, SpatialVector):
             return SpatialVector(self.x + other.x, self.y + other.y, self.z + other.z)
