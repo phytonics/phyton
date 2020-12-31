@@ -8,7 +8,7 @@ import np
 def check(obj, cls):
     return cls in inspect(type(obj))
 
-def _isnumeric(val):
+def isnumeric(val):
     if type(val) in [np.generic, int, float, complex]: return True
     try: return bool(set(inspect(val)) & set([np.generic, int, float, complex]))
     except: return False
@@ -35,49 +35,49 @@ class Quantity:
         return s.strip()
 
     def __add__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(self.value+float(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value+other.value, self.unit + other.unit)
 
     def __radd__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(self.value+float(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value+other.value, self.unit + other.unit)
 
     def __sub__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(self.value-float(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value-other.value, self.unit - other.unit)
 
     def __rsub__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(float(other)-self.value, self.unit)
         if check(other, Quantity):
             return Quantity(other.value-self.value, other.unit-self.unit)
 
     def __mul__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(self.value*float(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value*other.value, self.unit*other.unit)
 
     def __rmul__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(self.value*float(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value*other.value, self.unit*other.unit)
 
     def __truediv__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(self.value/float(other), self.unit)
         if check(other, Quantity):
             return Quantity(self.value/other.value, self.unit/other.unit)
 
     def __rtruediv__(self, other):
-        if _isnumeric(other):
+        if isnumeric(other):
             return Quantity(float(other)/self.value, 1/self.unit)
         if check(other, Quantity):
             return Quantity(other.value/self.value, other.unit/self.unit)
@@ -86,7 +86,7 @@ class Quantity:
         return Quantity(self.value**float(other), self.unit**other)
 
     def addvalue(self, val, name=''):
-        if _isnumeric(val):
+        if isnumeric(val):
             val = Quantity(val, self.unit)
         self.vals.append((val, name))
         return self
