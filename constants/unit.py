@@ -40,7 +40,7 @@ prefixes = [Prefix(),
 ]
 
 class Unit:
-    SIs = ['g', 'mol', 'm', 'A', 's', 'K', 'cd']
+    SIs = ['g', 'mol', "rad", 'm', 'A', 's', 'K', 'cd']
     def __init__(self, unit='', unitname='', unitfunc='', mul=1, add=0):
         self.unit, self.powers = self.fix(unit)
         self.unitname = unitname
@@ -54,6 +54,7 @@ class Unit:
     def fix(self, unit):
         numer = ''
         denom = ''
+
         if type(unit) == dict:
             powers = unit
         else:
@@ -205,11 +206,11 @@ templates = [
     "%sGy = Unit('m^2/s^2', '%sgray', 'absorbed dose, specific energy', %s)",
     "%sSv = Unit('m^2/s^2', '%ssievert', 'dose equivalent(d)', %s)",
     "%sBq = Unit('1/s', '%sbecquerel', 'activity (of a radionuclide)', %s)",
-    "%srad = Unit('m/m', '%sradian', 'plane angle', %s)",
+    "%srad = Unit('rad', '%sradian', 'plane angle', %s)",
     "%ssr = Unit('m^2/m^2', '%ssteradian', 'solid angle', %s)",
     "%slm = Unit('cd', '%slumen', 'luminous flux', %s)",
     "%slx = Unit('cd/m^2', '%slux', 'illuminance', %s)",
-    "%sdeg = Unit('m/m', '%s°', 'plane angle in degree scale', %s*(pi/180))",
+    "%sdeg = Unit('rad', '%s°', 'plane angle in degree scale', %s*(pi/180))",
     "%seV = Unit('gm^2/s^2', '%selectron Volts', 'measure of energy', %s*1.60217648740e-19)",
     "%smins = Unit('s', '%sminutes', 'measure of time', %s*60)",
     "%shr = Unit('s', '%shours', 'measure of time', %s*3600)",
