@@ -13,7 +13,7 @@ class Quantity:
 
         if type(value) == Quantity: value = value.value;
 
-        self.val, self.value = (convert(value) * unit.mul) + unit.add, value
+        self.val, self.value = (convert(value) * unit.mul) + unit.add, convert(value)
         self.unit = unit
         self.name = str(name)
         self.vals = []
@@ -31,25 +31,29 @@ class Quantity:
         if isnumeric(other):
             return Quantity(self.value+convert(other), self.unit)
         if check(other, Quantity):
-            return Quantity(self.value+other.value, self.unit + other.unit)
+            if str(self.unit) == str(other.unit):
+                return Quantity(self.value+other.value, self.unit)
 
     def __radd__(self, other):
         if isnumeric(other):
             return Quantity(self.value+convert(other), self.unit)
         if check(other, Quantity):
-            return Quantity(self.value+other.value, self.unit + other.unit)
+            if str(self.unit) == str(other.unit):
+                return Quantity(self.value+other.value, self.unit)
 
     def __sub__(self, other):
         if isnumeric(other):
             return Quantity(self.value-convert(other), self.unit)
         if check(other, Quantity):
-            return Quantity(self.value-other.value, self.unit - other.unit)
+            if str(self.unit) == str(other.unit):
+                return Quantity(self.value-other.value, self.unit)
 
     def __rsub__(self, other):
         if isnumeric(other):
             return Quantity(convert(other)-self.value, self.unit)
         if check(other, Quantity):
-            return Quantity(other.value-self.value, other.unit-self.unit)
+            if str(self.unit) == str(other.unit):
+                return Quantity(other.value-self.value, other.unit)
 
     def __mul__(self, other):
         if isnumeric(other):
