@@ -88,6 +88,10 @@ class SpatialVector:
             return SpatialVector(other.x - self.x , other.y - self.y , other.z - self.z)
         else: return self
 
+    def __mul__(self, other):
+        if isnumeric(other): return SpatialVector(convert(other)*self.x, convert(other)*self.y, convert(other)*self.z)
+        elif check(other, SpatialVector): return self.dot(other)
+
     def __truediv__(self, other):
         if check(other, SpatialVector):
             if other.x != 0 and other.y != 0 and other.z != 0:
