@@ -84,7 +84,10 @@ class Quantity:
 
     def addvalue(self, val, name=''):
         if isnumeric(val):
-            val = Quantity(val, self.unit)
+            val = Quantity(convert(val), self.unit)
+        elif check(val, SpatialVector):
+            val = Quantity(convert(val), self.unit)
+
         self.vals.append((val, name))
         return self
 
