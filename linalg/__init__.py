@@ -18,6 +18,8 @@ def convert(value):
     if type(value) == SpatialVector or type(value) == _Scalar: return value
     elif isnumeric(value): return _Scalar(value)
 
+
+
 class _Scalar(float): pass
 
 
