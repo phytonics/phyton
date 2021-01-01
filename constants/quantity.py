@@ -6,6 +6,12 @@ from inspect import getmro as inspect
 import np
 from phyton.linalg import *
 
+def angleBetween(self, other):
+    if check(other, SpatialVector) and check(self, SpatialVector):
+        return rad(acos(self.dot(other) / (self.mag *  other.mag)))
+
+SpatialVector.angleFrom = angleBetween
+
 class Quantity:
     def __init__(self, value, unit=Unit(), name=''):
         if type(unit) == Quantity: unit = Unit(unit=unit.unit.unit, unitname=unit.unit.unitname, unitfunc=unit.unit.unitfunc, mul=unit.unit.mul*unit.value, add=unit.unit.add)
