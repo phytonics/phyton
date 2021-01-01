@@ -86,7 +86,7 @@ class Quantity:
             return Quantity(other.value/self.value, other.unit/self.unit)
 
     def __pow__(self, other):
-        return Quantity(self.value**convert(other), self.unit**other)
+        if isnumeric(other): return Quantity(self.value**convert(other), self.unit**other)
 
     def addvalue(self, val, name=''):
         if isnumeric(val):
@@ -102,3 +102,10 @@ class Quantity:
 
     def __call__(self, *args, **kwargs):
         if self.func: return self.func(*args, **kwargs)
+        else:
+            mul = self
+            for i in args:
+                if isnumeric(i) or check(i, Quantity) or check(i, SpatialVector):
+                    mul = mul * convert(i)
+
+            return mul
