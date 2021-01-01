@@ -106,6 +106,6 @@ class Quantity:
             mul = self
             for i in args:
                 if isnumeric(i) or check(i, Quantity) or check(i, SpatialVector):
-                    mul = mul * convert(i)
+                    mul = mul * i
 
             return mul
