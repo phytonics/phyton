@@ -65,10 +65,11 @@ class SpatialVector:
         return self / self.mag
 
     def __repr__(self):
-        return f"SpatialVector({self.x}, {self.y}, {self.z})"
+        return "SpatialVector"+str(self)
 
     def __str__(self):
-        return f"({self.x}, {self.y}, {self.z})"
+        return f"({self.x}"+int(not(self.y == 0 and self.z == 0))*f", {self.y}"+int(self.z != 0)*f", {self.z}"+")"
+
 
     def __add__(self, other):
         if check(other, SpatialVector):
