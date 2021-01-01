@@ -68,7 +68,7 @@ class SpatialVector:
         return "SpatialVector"+str(self)
 
     def __str__(self):
-        return f"({self.x}"+int(not(self.y == 0 and self.z == 0))*f", {self.y}"+int(self.z != 0)*f", {self.z}"+")"
+        return int(not(self.y == 0 and self.z == 0))*"("+f"{self.x}"+int(not(self.y == 0 and self.z == 0))*f", {self.y}"+int(self.z != 0)*f", {self.z}"+int(not(self.y == 0 and self.z == 0))*")"
 
 
     def __add__(self, other):
