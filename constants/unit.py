@@ -50,7 +50,7 @@ class Unit:
         if '/' in self.unit: self.numer, self.denom = self.unit.split('/')
         else: self.numer, self.denom = self.unit, ''
 
-        
+
     def fix(self, unit):
         numer = ''
         denom = ''
@@ -113,13 +113,13 @@ class Unit:
             return Unit(self.unit, mul = self.mul*float(other), add = self.add*float(other))
         if type(other) == Unit:
             return Unit(self.numer+other.numer+'/'+self.denom+other.denom, mul = self.mul*other.mul, add = self.add+other.add)
-        
+
     def __rmul__(self, other):
         if _isnumeric(other):
             return Unit(self.unit, mul = self.mul*float(other), add = self.add*float(other))
         if type(other) == Unit:
             return Unit(self.numer+other.numer+'/'+self.denom+other.denom, mul = self.mul*other.mul, add = self.add+other.add)
-        
+
     def __add__(self, other):
         if _isnumeric(other):
             return Unit(self.unit, self.unitname, self.unitfunc, self.mul, self.add+float(other))
@@ -173,8 +173,8 @@ class Unit:
 
     def __call__(self, val, name=''):
         return quantity.Quantity(val, self, name)
-        
-        
+
+
 
 templates = [
     "%sm = Unit('m', '%smetre', 'length', %s)",
