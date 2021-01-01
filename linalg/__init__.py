@@ -1,7 +1,7 @@
 import np
 from math import *
 from inspect import getmro as inspect
-from phyton.constants.unit import rad
+#from phyton.constants.unit import rad
 
 def check(obj, cls):
     return cls in inspect(type(obj))
@@ -52,7 +52,7 @@ class SpatialVector:
 
     def angleFrom(self, other):
         if check(other, SpatialVector):
-            return rad(acos(self.dot(other) / (self.mag *  other.mag)))
+            return acos(self.dot(other) / (self.mag *  other.mag))
 
     @property
     def mag(self):
