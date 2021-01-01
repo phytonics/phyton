@@ -20,7 +20,9 @@ def convert(value):
 
 
 
-class _Scalar(float): pass
+class _Scalar(complex):
+    def __str__(self):
+        return int(self.real != 0 and self.imag != 0)*"(" + int(self.real != 0)*f"{self.real}" + int(self.real != 0 and self.imag != 0)*" + " + int(self.imag != 0)*f"{self.imag}i" + int(self.real != 0 and self.imag != 0)*")"
 
 
 class SpatialVector:
@@ -142,8 +144,7 @@ class SpatialVector:
 
 
 class ArgandVector(SpatialVector):
-    def __init__(self, real=0, complex=0):
-        super().__init__(self, real, complex)
+    def __init__(self, real=0, imag=0):
         """if column:
             super().__init__(self, [[x], [y], [z]], dtype=float)
         else:
@@ -152,8 +153,12 @@ class ArgandVector(SpatialVector):
         self.column = column
         self.row = not row """
 
-        self.real = convert(real)
-        self.complex = convert(complex)
+        self.complex = complex(real, imag)
+        self.real = convert(self.complex.real)
+        self.imag = convert(self.complex.imag)
+
+        super().__init__(self.real, self.imag)
+
         self.vec = (self.real, self.complex)
 
     @property
@@ -175,13 +180,5 @@ class ArgandVector(SpatialVector):
         else: return self * other
 
     def angleFrom(self, other):
-        if check(other, SpatialVector):
+        if check(other, ArgandVector):
             return acos(self.dot(other) / (self.mag *  other.mag))
-
-    @property
-    def mag(self):
-        return _mag(*self.vec)
-
-    @property
-    def unitVector(self):
-        return self / self.mag
