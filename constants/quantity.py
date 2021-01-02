@@ -108,6 +108,10 @@ class Quantity:
     def setfunc(self, func):
         self.func = func
 
+    @property
+    def mag(self):
+        return self.unit(self.value.mag)
+
     def __call__(self, *args, **kwargs):
         if self.func: return self.func(*args, **kwargs)
         else:
