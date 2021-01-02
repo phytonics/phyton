@@ -25,7 +25,7 @@ class Quantity:
 
         if type(value) == Quantity: value = value.value;
 
-        if isnumeric(value): value = Scalar(value)
+        if isnumeric(value): value = SpatialVector(value)
 
         self.val, self.value = (convert(value) * unit.mul) + unit.add, convert(value)
         self.unit = unit
@@ -33,11 +33,11 @@ class Quantity:
         self.vals = []
         self.func = None
 
-    def __str__(self): return (f"{self.val}" + bool(self.unit)*f" {self.unit}").strip()
+    def __str__(self): return (str(self.val) + bool(self.unit)*f" {self.unit}").strip()
     def __repr__(self):
         s = bool(self.name)*f"{self.name} = " + str(self)
         for i in self.vals:
-            s += '\n'+(f'%{len(self.name)}s' % i[-1])*bool(self.name) + f' = {i[0]}'
+            s += '\n'+(f'%{len(self.name)}s' % i[-1])*bool(self.name) + ' = '+str(i[0])
             #s += '\n'+' '*(bool(self.name)*len(f"{self.name}")) + bool(self.name)*' = '+str(i)
         return s.strip()
 
