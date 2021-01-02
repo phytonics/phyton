@@ -1,5 +1,4 @@
 # phyton.constants
-from sympy import Symbol
 from phyton.constants.quantity import *
 from phyton.constants.unit import *
 #from math import *
