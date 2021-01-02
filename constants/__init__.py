@@ -1,7 +1,6 @@
 # phyton.constants
 from phyton.constants.quantity import *
 from phyton.constants.unit import *
-#from math import *
 import math
 
 
