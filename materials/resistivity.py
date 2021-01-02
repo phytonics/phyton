@@ -18,4 +18,3 @@ class resistivity:
     diamond = Quantity(10**12, Ω*m, 'Resistivity of Diamond')
     polythene = Quantity(10**16, Ω*m, 'Resistivity of Polythene')
     Pt = platinum = Quantity(10.6e-8, Ω*m, 'Resistivity of Platinum')
-    
