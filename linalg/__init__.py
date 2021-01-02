@@ -83,6 +83,14 @@ class SpatialVector:
     def unitVector(self):
         return self / self.mag
 
+    def __len__(self):
+        if self.z == 0 and self.y == 0: return 1
+        if self.z == 0: return 2
+        return 3
+
+    def ndim(self):
+        return len(self)
+
     def __repr__(self):
         return str(self)
 
