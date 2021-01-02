@@ -177,6 +177,9 @@ class Unit:
         if type(args[-1]) == str:
             name = args[-1]
             args = args[:-1]
+
+        if len(args) == 1:
+            args = args[0]
         return quantity.Quantity(args, self, name)
 
     def __getitem__(self, key):
