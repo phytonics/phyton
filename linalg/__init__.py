@@ -48,14 +48,6 @@ Scalar.__str__ = lambda self: int(self.real != 0 and self.imag != 0)*"(" + int(s
 
 class SpatialVector:
     def __init__(self, x = 0, y = 0, z = 0):
-        """if column:
-            super().__init__(self, [[x], [y], [z]], dtype=float)
-        else:
-            super().__init__(self, [x, y, z], dtype=float)
-
-        self.column = column
-        self.row = not row """
-
         self.x = convert(x)
         self.y = convert(y)
         self.z = convert(z)
