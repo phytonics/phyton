@@ -1,5 +1,5 @@
 import np
-from math import *
+import math
 from inspect import getmro as inspect
 #from phyton.constants.unit import rad
 
@@ -73,7 +73,7 @@ class SpatialVector:
 
     def angleFrom(self, other):
         if check(other, SpatialVector):
-            return acos(self.dot(other) / (self.mag *  other.mag))
+            return math.acos(self.dot(other) / (self.mag *  other.mag))
 
     @property
     def mag(self):
@@ -159,13 +159,13 @@ class SpatialVector:
         return SpatialVector(round(self.x, n), round(self.y, n), round(self.z,n))
 
     def __floor__(self):
-        return SpatialVector(floor(self.x), floor(self.y), floor(self.z))
+        return SpatialVector(math.floor(self.x), math.floor(self.y), math.floor(self.z))
 
     def __ceil__(self):
-        return SpatialVector(ceil(self.x), ceil(self.y), ceil(self.z))
+        return SpatialVector(math.ceil(self.x), math.ceil(self.y), math.ceil(self.z))
 
     def __trunc__(self):
-        return SpatialVector(trunc(self.x), trunc(self.y), trunc(self.z))
+        return SpatialVector(math.trunc(self.x), math.trunc(self.y), math.trunc(self.z))
 
     def __pow__(self, other):
         return SpatialVector(self.x * convert(other), self.y * convert(other), self.z * convert(other))
@@ -213,4 +213,4 @@ class ArgandVector(SpatialVector):
 
     def angleFrom(self, other):
         if check(other, ArgandVector):
-            return acos(self.dot(other) / (self.mag *  other.mag))
+            return math.acos(self.dot(other) / (self.mag *  other.mag))
