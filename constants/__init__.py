@@ -81,8 +81,8 @@ m_p = Quantity(1.6726219236951e-27, kg, 'Rest mass of proton')
 m_n = Quantity(1.6749274980495e-27, kg, 'Rest mass of neutron')
 m_α = 4.003*u
 qe = Quantity(1.602176634e-19, C, 'Elementary Charge')
-ε0 = Quantity(8.854187812813e-12, (C**2)/(N*m**2), 'Electric constant, Vacuum Electric Permittivity')
-μ0 = Quantity(1.2566370621219e-6, T*m/A, 'Magnetic constant, Vacuum Magnetic Permeability')
+epsilon0 = ε0 = Quantity(8.854187812813e-12, (C**2)/(N*m**2), 'Electric constant, Vacuum Electric Permittivity')
+mu0 = μ0 = Quantity(1.2566370621219e-6, T*m/A, 'Magnetic constant, Vacuum Magnetic Permeability')
 
 m_p = Quantity(2.1765113e-8, kg, 'Planck mass')
 t_p = Quantity(5.3910632e-44, s, 'Planck time')
@@ -124,7 +124,7 @@ c2 = Quantity(1.438776877e-2, m*K, "Second radiation constant")
 
 
 # Electromagnetic constants
-Z0 = Quantity(376.73031366857, Ω, "Characterisitic Impedance of vacuum")
+Z0 = Quantity(376.73031366857, Ω, "Characteristic Impedance of vacuum")
 Φ0 = Quantity(2.06783375846e-15, Wb, "Magnetic flux quantum")
 K_J = Quantity(4.8359787011e14, Hz/V, 'Josephson constant')
 R_K = Quantity(2.5812807443484e4, Ω, "von Klitzing constant")
