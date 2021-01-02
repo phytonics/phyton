@@ -1,5 +1,5 @@
-from numpy import pi
-import numpy
+from np import pi
+import np
 
 # [6]
 mu0 = pi * 4.0e-7
@@ -49,7 +49,7 @@ class BoronTrioxide(Material):
     bp = 2133.0
     ρ = 1.5e3
     c = specific_heat_capacity = 1.802e3
-    
+
     @staticmethod
     def density(*args): return ρ
 
@@ -68,13 +68,13 @@ class CarbonSteel(Material):
 
     @staticmethod
     def thermal_conductivity(*args): return λ
-    
+
     @staticmethod
     def density(*args): return ρ
 
 class Copper(Material):
     μ = 0.999994*mu0
-    resistivity = 
+    #resistivity =
 
     @staticmethod
     def electrical_conductivity(T): return 1.0 / (-3.033e-9 + 68.85e-12*T - 6.72e-15*T**2 + 8.56e-18*T**3)
@@ -84,8 +84,8 @@ class Copper(Material):
 
     @staticmethod
     def density(T):
-        return 8.9975852012753705e3 * numpy.exp(-1.0e-6 * (+ 13.251 * T+ 6.903e-3 / 2.0 * T**2+ 8.5306e-7 / 3.0 * T**3))
-    
+        return 8.9975852012753705e3 * np.exp(-1.0e-6 * (+ 13.251 * T+ 6.903e-3 / 2.0 * T**2+ 8.5306e-7 / 3.0 * T**3))
+
     @staticmethod
     def shc(T): return 316.21 + 0.3177*T - 3.4936e-4*T**2 + 1.661e-7*T**3
 
@@ -95,7 +95,7 @@ class Graphite(Material):
     mp = 3900.0
     @staticmethod
     def electrical_conductivity(T):
-        return 1e6 / (28.9 - 18.8 * numpy.exp(-(numpy.log(T/1023.0)/2.37)**2))
+        return 1e6 / (28.9 - 18.8 * np.exp(-(np.log(T/1023.0)/2.37)**2))
 
     @staticmethod
     def thermal_conductivity(T): return 1.0 / (-9.797e-08*T**2 + 0.0007809*T - 0.05741)
@@ -103,9 +103,6 @@ class Graphite(Material):
     @staticmethod
     def density(T):
         return 2.267e3 / (1 + 30.0e-6*(T-298.0))
-    
+
     @staticmethod
     def shc(T): return 4.184e3 * (+ 0.538657 + 9.11129e-6 * T - 90.2725 / T - 43449.3 / T**2 + 1.59309e7 / T**3 - 1.43688e9 / T**4)
-
-
-class 
