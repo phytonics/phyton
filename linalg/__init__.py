@@ -20,9 +20,27 @@ def convert(value):
 
 
 
-class Scalar(complex):
+class Scalar:
+    def __init__(self, real=0, imag=0):
+        self.real = real
+        self.imag = imag
+
     def __str__(self):
-        return int(self.real != 0 and self.imag != 0)*"(" + int(self.real != 0)*f"{self.real}" + int(self.real != 0 and self.imag != 0)*" + " + int(self.imag != 0)*f"{self.imag}i" + int(self.real != 0 and self.imag != 0)*")"
+        s = ""
+        if self.real != 0 and self.imag != 0: s += "("
+        print(s)
+        if self.real != 0: s += f"{self.real}"
+        print(s)
+        if self.real != 0 and self.imag != 0: s += " + "
+        print(s)
+        if self.imag != 0: s += f"{self.imag}i"
+        print(s)
+        if self.real != 0 and self.imag != 0: s += ")"
+        print(s)
+
+        return s
+
+        #return int(self.real != 0 and self.imag != 0)*"(" + int(self.real != 0)*f"{self.real}" + int(self.real != 0 and self.imag != 0)*" + " + int(self.imag != 0)*f"{self.imag}i" + int(self.real != 0 and self.imag != 0)*")"
 
     def _repr__(self):
         return str(self)
