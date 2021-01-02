@@ -150,14 +150,18 @@ class SpatialVector:
     def __round__(self, n):
         return SpatialVector(round(self.x, n), round(self.y, n), round(self.z,n))
 
-    def __floor__(self, n):
+    def __floor__(self):
         return SpatialVector(floor(self.x), floor(self.y), floor(self.z))
 
-    def __ceil__(self, n):
+    def __ceil__(self):
         return SpatialVector(ceil(self.x), ceil(self.y), ceil(self.z))
 
-    def __trunc__(self, n):
+    def __trunc__(self):
         return SpatialVector(trunc(self.x), trunc(self.y), trunc(self.z))
+
+    def __pow__(self, other):
+        return SpatialVector(self.x * convert(other), self.y * convert(other), self.z * convert(other))
+
 
 
 class ArgandVector(SpatialVector):
