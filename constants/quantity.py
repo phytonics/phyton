@@ -1,7 +1,7 @@
 # phyton.constants.quantity
 
 from phyton.constants.unit import *
-from math import *
+import math
 from inspect import getmro as inspect
 import np
 from phyton.linalg import *
@@ -9,7 +9,7 @@ from collections.abc import Iterable
 
 def angleBetween(self, other):
     if check(other, SpatialVector) and check(self, SpatialVector):
-        return rad(acos(self.dot(other) / (self.mag *  other.mag)))
+        return rad(math.acos(self.dot(other) / (self.mag *  other.mag)))
 
 SpatialVector.angleFrom = angleBetween
 
