@@ -31,8 +31,6 @@ class Scalar(complex):
 
         return s
 
-        #return int(self.real != 0 and self.imag != 0)*"(" + int(self.real != 0)*f"{self.real}" + int(self.real != 0 and self.imag != 0)*" + " + int(self.imag != 0)*f"{self.imag}i" + int(self.real != 0 and self.imag != 0)*")"
-
     def _repr__(self):
         s = ""
         if self.real != 0 and self.imag != 0: s += "("
