@@ -21,6 +21,10 @@ def convert(value):
 
 
 class Scalar(complex):
+    @property
+    def mag(self):
+        return _mag(self.real, self.imag)
+
     def __str__(self):
         s = ""
         if self.real != 0 and self.imag != 0: s += "("
