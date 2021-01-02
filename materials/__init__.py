@@ -1,5 +1,6 @@
 from np import pi
 import np
+from phyton.constants import *
 
 # [6]
 mu0 = pi * 4.0e-7
