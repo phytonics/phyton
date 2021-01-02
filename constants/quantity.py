@@ -5,6 +5,7 @@ from math import *
 from inspect import getmro as inspect
 import np
 from phyton.linalg import *
+from collections.abc import Iterable
 
 def angleBetween(self, other):
     if check(other, SpatialVector) and check(self, SpatialVector):
@@ -16,6 +17,11 @@ class Quantity:
     def __init__(self, value, unit=Unit(), name=''):
         if type(unit) == Quantity: unit = Unit(unit=unit.unit.unit, unitname=unit.unit.unitname, unitfunc=unit.unit.unitfunc, mul=unit.unit.mul*unit.value, add=unit.unit.add)
         elif type(unit) != Unit: unit = Unit(unit)
+
+        if isinstance(value, Iterable):
+            if all(isnumeric(i) for i in value):
+                val = list(iter(value))
+                value = SpatialVector(*val[:3])
 
         if type(value) == Quantity: value = value.value;
 
