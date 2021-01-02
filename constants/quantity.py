@@ -25,7 +25,7 @@ class Quantity:
 
         if type(value) == Quantity: value = value.value;
 
-        if isnumeric(value): value = SpatialVector(value)
+        if isnumeric(value): value = convert(value)
 
         self.val, self.value = (convert(value) * unit.mul) + unit.add, convert(value)
         self.unit = unit
