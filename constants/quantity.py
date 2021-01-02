@@ -27,7 +27,7 @@ class Quantity:
 
         if isnumeric(value): value = convert(value)
 
-        self.val, self.value = (convert(value) * unit.mul) + unit.add, convert(value)
+        self.val, self.value = convert((convert(value) * unit.mul) + unit.add), convert(value)
         self.unit = unit
         self.name = str(name)
         self.vals = []
