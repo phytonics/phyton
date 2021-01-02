@@ -170,6 +170,9 @@ class SpatialVector:
     def __pow__(self, other):
         return SpatialVector(self.x * convert(other), self.y * convert(other), self.z * convert(other))
 
+    def __getitem__(self, key):
+        return self.vec.__getitem__(key)
+
 
 
 class ArgandVector(SpatialVector):
