@@ -172,8 +172,12 @@ class Unit:
     def __eq__(self, other):
         return self.unit == other.unit
 
-    def __call__(self, val, name=''):
-        return quantity.Quantity(val, self, name)
+    def __call__(self, *args):
+        name = ""
+        if type(args[-1]) == str:
+            name = args[-1]
+            args = args[:-1]
+        return quantity.Quantity(args, self, name)
 
     def __getitem__(self, key):
         return quantity.Quantity(key, self)
