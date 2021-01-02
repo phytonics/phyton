@@ -34,7 +34,14 @@ class Scalar(complex):
         #return int(self.real != 0 and self.imag != 0)*"(" + int(self.real != 0)*f"{self.real}" + int(self.real != 0 and self.imag != 0)*" + " + int(self.imag != 0)*f"{self.imag}i" + int(self.real != 0 and self.imag != 0)*")"
 
     def _repr__(self):
-        return str(self)
+        s = ""
+        if self.real != 0 and self.imag != 0: s += "("
+        if self.real != 0: s += f"{self.real}"
+        if self.real != 0 and self.imag != 0: s += " + "
+        if self.imag != 0: s += f"{self.imag}i"
+        if self.real != 0 and self.imag != 0: s += ")"
+
+        return s
 
 
 class SpatialVector:
