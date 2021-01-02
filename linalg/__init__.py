@@ -15,12 +15,12 @@ def _mag(*args):
     return sum([i**2 for i in args]) ** 0.5
 
 def convert(value):
-    if check(value, SpatialVector) or type(value) == _Scalar: return value
-    elif isnumeric(value): return _Scalar(value)
+    if check(value, SpatialVector) or type(value) == Scalar: return value
+    elif isnumeric(value): return Scalar(value)
 
 
 
-class _Scalar(complex):
+class Scalar(complex):
     def __str__(self):
         return int(self.real != 0 and self.imag != 0)*"(" + int(self.real != 0)*f"{self.real}" + int(self.real != 0 and self.imag != 0)*" + " + int(self.imag != 0)*f"{self.imag}i" + int(self.real != 0 and self.imag != 0)*")"
 
