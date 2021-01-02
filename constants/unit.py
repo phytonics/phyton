@@ -175,6 +175,9 @@ class Unit:
     def __call__(self, val, name=''):
         return quantity.Quantity(val, self, name)
 
+    def __getitem__(self, key):
+        return quantity.Quantity(key, self)
+
 
 
 templates = [
