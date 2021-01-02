@@ -16,7 +16,7 @@ def _mag(*args):
 
 def convert(value):
     if check(value, SpatialVector) or type(value) == _Scalar: return value
-    elif isnumeric(value): return _SpatialVector(value)
+    elif isnumeric(value): return _Scalar(value)
 
 
 
