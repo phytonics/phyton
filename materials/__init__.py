@@ -2,9 +2,6 @@ from np import pi
 import np
 from phyton.constants import *
 
-# [6]
-mu0 = pi * 4.0e-7
-
 class Material:
     μ = magnetic_permeability = 1.00000037 * mu0
     ε = electrical_conductivity = 0.0
