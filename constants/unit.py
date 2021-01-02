@@ -41,12 +41,13 @@ prefixes = [Prefix(),
 
 class Unit:
     SIs = ['g', 'mol', "rad", 'm', 'A', 's', 'K', 'cd']
-    def __init__(self, unit='', unitname='', unitfunc='', mul=1, add=0):
+    def __init__(self, unit='', unitname='', unitfunc='', mul=1, add=0, scalar=False):
         self.unit, self.powers = self.fix(unit)
         self.unitname = unitname
         self.unitfunc = unitfunc
         self.mul = mul
         self.add = add
+        self.scalar = scalar
         if '/' in self.unit: self.numer, self.denom = self.unit.split('/')
         else: self.numer, self.denom = self.unit, ''
 
@@ -189,31 +190,31 @@ class Unit:
 
 templates = [
     "%sm = Unit('m', '%smetre', 'length', %s)",
-    "%ss = Unit('s', '%ssecond', 'time', %s)",
-    "%sg = Unit('g', '%sgram', 'mass', %s)",
-    "%sA = Unit('A', '%sampere', 'electric current', %s)",
-    "%sK = Unit('K', '%skelvin', 'thermodynamic temperature', %s)",
-    "%smol = Unit('mol', '%smole', 'amount of substance', %s)",
-    "%scd = Unit('cd', '%scandela', 'luminous intensity', %s)",
-    "%sHz = Unit('1/s', '%shertz', 'frequency', %s)",
+    "%ss = Unit('s', '%ssecond', 'time', %s, scalar=True)",
+    "%sg = Unit('g', '%sgram', 'mass', %s, scalar=True)",
+    "%sA = Unit('A', '%sampere', 'electric current', %s, scalar=True)",
+    "%sK = Unit('K', '%skelvin', 'thermodynamic temperature', %s, scalar=True)",
+    "%smol = Unit('mol', '%smole', 'amount of substance', %s, scalar=True)",
+    "%scd = Unit('cd', '%scandela', 'luminous intensity', %s, scalar=True)",
+    "%sHz = Unit('1/s', '%shertz', 'frequency', %s, scalar=True)",
     "%sN = Unit('gm/s^2', '%snewton', 'force', %s)",
-    "%sPa = Unit('g/ms^2', '%spascal', 'pressure, stress', %s)",
-    "%sJ = Unit('gm^2/s^2', '%sjoule', 'energy, work, amount of heat', %s)",
-    "%sW = Unit('gm^2/s^3', '%swatt', 'power, radiant flux', %s)",
-    "%sC = Unit('As', '%scoulomb', 'electric charge, quantity of electricity', %s)",
-    "%sV = Unit('gm^2/As^3', '%svolt', 'electric potential, emf', %s)",
-    "%sΩ = Unit('gm^2/s^3A^2', '%sohm', 'electric resistance, impedance', %s)",
-    "%sohm = Unit('gm^2/s^3A^2', '%sohm', 'electric resistance, impedance', %s)",
-    "%skat = Unit('mol/s', '%skatal', 'catalytic activity', %s)",
-    "%sS = Unit('A^2s^3/gm^2', '%ssiemen', 'electric conductance', %s)",
-    "%sF = Unit('A^2s^4/gm^2', '%sfarad', 'capacitance', %s)",
-    "%sWb = Unit('gm^2/As^2', '%sweber', 'magnetic flux', %s)",
+    "%sPa = Unit('g/ms^2', '%spascal', 'pressure, stress', %s, scalar=True)",
+    "%sJ = Unit('gm^2/s^2', '%sjoule', 'energy, work, amount of heat', %s, scalar=True)",
+    "%sW = Unit('gm^2/s^3', '%swatt', 'power, radiant flux', %s, scalar=True)",
+    "%sC = Unit('As', '%scoulomb', 'electric charge, quantity of electricity', %s, scalar=True)",
+    "%sV = Unit('gm^2/As^3', '%svolt', 'electric potential, emf', %s, scalar=True)",
+    "%sΩ = Unit('gm^2/s^3A^2', '%sohm', 'electric resistance, impedance', %s, scalar=True)",
+    "%sohm = Unit('gm^2/s^3A^2', '%sohm', 'electric resistance, impedance', %s, scalar=True)",
+    "%skat = Unit('mol/s', '%skatal', 'catalytic activity', %s, scalar=True)",
+    "%sS = Unit('A^2s^3/gm^2', '%ssiemen', 'electric conductance', %s, scalar=True)",
+    "%sF = Unit('A^2s^4/gm^2', '%sfarad', 'capacitance', %s, scalar=True)",
+    "%sWb = Unit('gm^2/As^2', '%sweber', 'magnetic flux', %s, scalar=True)",
     "%sT = Unit('g/As^2', '%stesla', 'magnetic field', %s)",
-    "%sH = Unit('gm^2/A^2s^2', '%shenry', 'inductance', %s)",
-    "%sdegreeCelsius = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15)",
-    "%sdegCelsius = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15)",
-    "%sdegC = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15)",
-    "%sGy = Unit('m^2/s^2', '%sgray', 'absorbed dose, specific energy', %s)",
+    "%sH = Unit('gm^2/A^2s^2', '%shenry', 'inductance', %s, scalar=True)",
+    "%sdegreeCelsius = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15, scalar=True)",
+    "%sdegCelsius = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15, scalar=True)",
+    "%sdegC = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15, scalar=True)",
+    "%sGy = Unit('m^2/s^2', '%sgray', 'absorbed dose, specific energy', %s, scalar=True)",
     "%sSv = Unit('m^2/s^2', '%ssievert', 'dose equivalent(d)', %s)",
     "%sBq = Unit('1/s', '%sbecquerel', 'activity (of a radionuclide)', %s)",
     "%srad = Unit('rad', '%sradian', 'plane angle', %s)",
