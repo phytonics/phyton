@@ -5,6 +5,7 @@ from inspect import getmro as inspect
 from math import pi
 import np
 from phyton.constants import quantity
+from collections.abc import Iterable
 
 def _isnumeric(val):
     if type(val) in [np.generic, int, float, complex]: return True
@@ -184,6 +185,9 @@ class Unit:
         return quantity.Quantity(args, self, name)
 
     def __getitem__(self, key):
+        if isinstance(key, Iterable):
+            key = list(key)
+            if self.scalar or len(key) == 1: key = key[0]
         return quantity.Quantity(key, self)
 
 
