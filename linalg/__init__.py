@@ -1,7 +1,6 @@
 import np
 import math
 from inspect import getmro as inspect
-#from phyton.constants.unit import rad
 
 def check(obj, cls):
     return cls in inspect(type(obj))
