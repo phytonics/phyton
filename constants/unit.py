@@ -179,7 +179,7 @@ class Unit:
             name = args[-1]
             args = args[:-1]
 
-        if len(args) == 1:
+        if len(args) == 1 or self.scalar:
             args = args[0]
         return quantity.Quantity(args, self, name)
 
@@ -215,20 +215,20 @@ templates = [
     "%sdegCelsius = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15, scalar=True)",
     "%sdegC = Unit('K', '%s°Celsius', 'temperature on the celsius scale', %s, -273.15, scalar=True)",
     "%sGy = Unit('m^2/s^2', '%sgray', 'absorbed dose, specific energy', %s, scalar=True)",
-    "%sSv = Unit('m^2/s^2', '%ssievert', 'dose equivalent(d)', %s)",
-    "%sBq = Unit('1/s', '%sbecquerel', 'activity (of a radionuclide)', %s)",
-    "%srad = Unit('rad', '%sradian', 'plane angle', %s)",
-    "%ssr = Unit('m^2/m^2', '%ssteradian', 'solid angle', %s)",
-    "%slm = Unit('cd', '%slumen', 'luminous flux', %s)",
-    "%slx = Unit('cd/m^2', '%slux', 'illuminance', %s)",
-    "%sdeg = Unit('rad', '%s°', 'plane angle in degree scale', %s*(pi/180))",
-    "%seV = Unit('gm^2/s^2', '%selectron Volts', 'measure of energy', %s*1.60217648740e-19)",
-    "%smins = Unit('s', '%sminutes', 'measure of time', %s*60)",
-    "%shr = Unit('s', '%shours', 'measure of time', %s*3600)",
-    "%sday = Unit('s', '%sdays', 'measure of time', %s*3600*24)",
-    "%syr = Unit('s', '%syears', 'measure of time', %s*3600*24*365.25)",
+    "%sSv = Unit('m^2/s^2', '%ssievert', 'dose equivalent(d)', %s, scalar=True)",
+    "%sBq = Unit('1/s', '%sbecquerel', 'activity (of a radionuclide)', %s, scalar=True)",
+    "%srad = Unit('rad', '%sradian', 'plane angle', %s, scalar=True)",
+    "%ssr = Unit('m^2/m^2', '%ssteradian', 'solid angle', %s, scalar=True)",
+    "%slm = Unit('cd', '%slumen', 'luminous flux', %s, scalar=True)",
+    "%slx = Unit('cd/m^2', '%slux', 'illuminance', %s, scalar=True)",
+    "%sdeg = Unit('rad', '%s°', 'plane angle in degree scale', %s*(pi/180), scalar=True)",
+    "%seV = Unit('gm^2/s^2', '%selectron Volts', 'measure of energy', %s*1.60217648740e-19, scalar=True)",
+    "%smins = Unit('s', '%sminutes', 'measure of time', %s*60, scalar=True)",
+    "%shr = Unit('s', '%shours', 'measure of time', %s*3600, scalar=True)",
+    "%sday = Unit('s', '%sdays', 'measure of time', %s*3600*24, scalar=True)",
+    "%syr = Unit('s', '%syears', 'measure of time', %s*3600*24*365.25, scalar=True)",
     "%sly = Unit('m', '%slightyear', 'measure of distance', %s*3600*24*365.25*299792458)",
-    "%spc = Unit('m', '%sparsec', 'measure of distance', %s*3.086e16)"
+    "%spc = Unit('m', '%sparsec', 'measure of distance', %s*3.086e16, scalar=True)"
 ]
 for p in prefixes:
     for temp in templates:
