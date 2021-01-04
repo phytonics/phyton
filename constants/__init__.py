@@ -30,7 +30,7 @@ mach = Quantity(340.0, m/s, 'Speed of Sound')
 # Gravitation and Cosmology
 G = Quantity(6.6743015e-11, (N*m**2)/(kg**2), 'Universal Gravitational Constant')
 g = Quantity(9.80665, m/(s**2), 'Average Gravitational Field Strength of the Earth')
-κ = Quantity(2.071e-43, s**2/(m*kg), 'Einstein\'s Gravitational Constant (Scaled G)')
+kappa = κ = Quantity(2.071e-43, s**2/(m*kg), 'Einstein\'s Gravitational Constant (Scaled G)')
 #kG = Quantity(, rad, 'Gaussian Gravitational Constant')
 
 
