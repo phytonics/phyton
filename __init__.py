@@ -1,5 +1,5 @@
 from .constants import *
-
+"""
 __all__ = [
  'pi',
  'Unit',
@@ -37,7 +37,7 @@ __all__ = [
  'lx',
  'deg',
  'eV',
- 'mins',
+ 'min',
  'hr',
  'day',
  'yr',
@@ -947,3 +947,4 @@ __all__ = [
  'm_τ',
  'm_tau',
 ]
+"""
