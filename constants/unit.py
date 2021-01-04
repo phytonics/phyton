@@ -232,7 +232,8 @@ templates = [
 #    "%sday = Unit('s', '%sdays', 'measure of time', %s*3600*24, scalar=True)",
 #    "%syr = Unit('s', '%syears', 'measure of time', %s*3600*24*365.25, scalar=True)",
     "%sly = Unit('m', '%slightyear', 'measure of distance', %s*3600*24*365.25*299792458)",
-    "%spc = Unit('m', '%sparsec', 'measure of distance', %s*3.086e16, scalar=True)"
+    "%spc = Unit('m', '%sparsec', 'measure of distance', %s*3.086e16, scalar=True)",
+    "%sL = Unit('m^3', '%slitre', 'measure of volume', %s/1000, scalar=True)"
 ]
 for p in prefixes:
     for temp in templates:
