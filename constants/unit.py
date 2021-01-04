@@ -227,10 +227,10 @@ templates = [
     "%slx = Unit('cd/m^2', '%slux', 'illuminance', %s, scalar=True)",
     "%sdeg = Unit('rad', '%s°', 'plane angle in degree scale', %s*(pi/180), scalar=True)",
     "%seV = Unit('gm^2/s^2', '%selectron Volts', 'measure of energy', %s*1.60217648740e-19, scalar=True)",
-    "%smins = Unit('s', '%sminutes', 'measure of time', %s*60, scalar=True)",
-    "%shr = Unit('s', '%shours', 'measure of time', %s*3600, scalar=True)",
-    "%sday = Unit('s', '%sdays', 'measure of time', %s*3600*24, scalar=True)",
-    "%syr = Unit('s', '%syears', 'measure of time', %s*3600*24*365.25, scalar=True)",
+#    "%smins = Unit('s', '%sminutes', 'measure of time', %s*60, scalar=True)",
+#    "%shr = Unit('s', '%shours', 'measure of time', %s*3600, scalar=True)",
+#    "%sday = Unit('s', '%sdays', 'measure of time', %s*3600*24, scalar=True)",
+#    "%syr = Unit('s', '%syears', 'measure of time', %s*3600*24*365.25, scalar=True)",
     "%sly = Unit('m', '%slightyear', 'measure of distance', %s*3600*24*365.25*299792458)",
     "%spc = Unit('m', '%sparsec', 'measure of distance', %s*3.086e16, scalar=True)"
 ]
@@ -245,4 +245,8 @@ for p in prefixes:
             except: pass
 
 #deg = Unit('m/m', '°', 'plane angle in degree scale', (pi/180))
-kWh = Unit('gm^2/s^2', 'kilowatt hour', 'measure of energy', 3.6e6)
+kWh = Unit('gm^2/s^2', 'kilowatt hour', 'measure of energy', 3.6e6, scalar=True)
+min = Unit('s', 'minutes', 'measure of time', 60, scalar=True)
+hr = Unit('s', 'hours', 'measure of time', 3600, scalar=True)
+day = Unit('s', 'days', 'measure of time', 3600*24, scalar=True)
+yr = Unit('s', 'years', 'measure of time', 3600*24*365.25, scalar=True)
