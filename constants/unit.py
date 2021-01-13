@@ -190,6 +190,9 @@ class Unit:
             if self.scalar or len(key) == 1: key = key[0]
         return quantity.Quantity(key, self)
 
+    def __xor__(self, other):
+        return self ** other
+
 
 
 templates = [
