@@ -121,3 +121,9 @@ class Quantity:
                     mul = mul * i
 
             return mul
+
+    def __neg__(self):
+        return unit(-value)
+
+    def __pos__(self):
+        return unit(value)
