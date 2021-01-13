@@ -123,7 +123,7 @@ class Quantity:
             return mul
 
     def __neg__(self):
-        return unit(-value)
+        return self.unit(-self.value)
 
     def __pos__(self):
-        return unit(value)
+        return self.unit(self.value)
