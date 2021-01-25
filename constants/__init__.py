@@ -1,3 +1,4 @@
+
 # phyton.constants
 from phyton.constants.quantity import *
 from phyton.constants.unit import *
@@ -84,10 +85,10 @@ qe = Quantity(1.602176634e-19, C, 'Elementary Charge')
 epsilon0 = ε0 = Quantity(8.854187812813e-12, (C**2)/(N*m**2), 'Electric constant, Vacuum Electric Permittivity')
 mu0 = μ0 = Quantity(1.2566370621219e-6, T*m/A, 'Magnetic constant, Vacuum Magnetic Permeability')
 
-m_p = Quantity(2.1765113e-8, kg, 'Planck mass')
-t_p = Quantity(5.3910632e-44, s, 'Planck time')
-l_p = Quantity(1.61619997e-35, m, 'Planck length')
-temp_p = Quantity(1.41683385e32, K, 'Planck temperature')
+p_m = Quantity(2.1765113e-8, kg, 'Planck mass')
+p_t = Quantity(5.3910632e-44, s, 'Planck time')
+p_l = Quantity(1.61619997e-35, m, 'Planck length')
+p_temp = Quantity(1.41683385e32, K, 'Planck temperature')
 
 R_inf = Quantity(10973731.56816021, 1/m, 'Rydberg constant')
 E_H = Quantity(4.359744722207185e-18, J, "Hartree energy")
@@ -148,7 +149,7 @@ K_cd = Quantity(683, lm/W, 'Luminous Efficacy of Monochromatic Radiation of Freq
 
 
 # Fundamental Constants (Courtesy of Domain of Science)
-m_p = Quantity(GeV(1.220896e19)/c**2, kg, "Planck Mass")
+p_m = Quantity(GeV(1.220896e19)/c**2, kg, "Planck Mass")
 m_c = Quantity(GeV(1.27)/c**2, kg, "Mass of Charm Quark")
 m_s = Quantity(MeV(101)/c**2, kg, "Mass of Strange Quark")
 m_t = Quantity(GeV(172)/c**2, kg, "Mass of Top Quark")
