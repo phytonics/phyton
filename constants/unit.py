@@ -103,13 +103,36 @@ class Unit:
 
     def __repr__(self):
         s = ''
-        if not(self.unitname or self.unitfunc): return self.unit.replace('g', 'kg')
+        if not(self.unitname or self.unitfunc): return str(self)
         if self.unitname: s += self.unitname
         if self.unitfunc: s += ': measure of '+self.unitfunc
         return s
 
     def __str__(self):
-        return self.unit.replace('g', 'kg')
+        unit = self.unit.replace('g', 'kg')
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm^2/s^3": return "W"
+        if unit == "1/s": return "Hz"
+        if unit == "kg/ms^2": return "Pa"
+        if unit == "As": return "C"
+        if unit == "kgm^2/As^3": return "V"
+        if unit == "kgm^2/s^3A^2": return "Ω"
+        if unit == "mol/s": return "kat"
+        if unit == "A^2s^3/kgm^2": return "S"
+        if unit == "A^2s^4/kgm^2": return "F"
+        if unit == "kgm^2/As^2": return "Wb"
+        if unit == "kg/As^2": return "T"
+        if unit == "kgm^2/A^2s^2": return "H"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        if unit == "kgm/s^2": return "N"
+        return unit
 
     def __mul__(self, other):
         if _isnumeric(other):
