@@ -96,11 +96,14 @@ class Quantity:
     def __pow__(self, other):
         if isnumeric(other): return Quantity(self.value**convert(other), self.unit**other)
 
-    def addvalue(self, val, name=''):
+    def addvalue(self, val, name='', unit=None):
+        if unit is None: unit = self.unit
         if isnumeric(val):
-            val = Quantity(convert(val), self.unit)
+            val = Quantity(convert(val), unit)
         elif check(val, SpatialVector):
-            val = Quantity(convert(val), self.unit)
+            val = Quantity(convert(val), unit)
+        elif check(val, Quantity):
+            val = Quantity(val.val, unit)
 
         self.vals.append((val, name))
         return self
