@@ -219,7 +219,7 @@ kB.addvalue(R/NA, "R/A")
 κ.addvalue(8*pi*G/(c**4), "8πG/c^4")
 
 ε0.addvalue(1/(4*pi*k), '1/4πk')
-mu0.addvalue(pi * 4.0e-7, "4.0πe-7")
+mu0.addvalue(pi * 4.0e-7, "4.0πe-7", T*m/A)
 
 c.addvalue(3.0e8, "Approximated Speed of Light")
 c.setfunc(_cFunc)
