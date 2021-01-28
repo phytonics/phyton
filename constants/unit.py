@@ -197,7 +197,7 @@ class Unit:
     def __eq__(self, other):
         return self.unit == other.unit
 
-    def __call__(self, *args):
+    def __call__(self, *args, uncertainty=0):
         name = ""
         if type(args[-1]) == str:
             name = args[-1]
@@ -205,7 +205,7 @@ class Unit:
 
         if len(args) == 1 or self.scalar:
             args = args[0]
-        return quantity.Quantity(args, self, name)
+        return quantity.Quantity(args, self, name, uncertainty=0)
 
     def __getitem__(self, key):
         if isinstance(key, Iterable):
