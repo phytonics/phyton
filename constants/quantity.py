@@ -14,7 +14,7 @@ def angleBetween(self, other):
 SpatialVector.angleFrom = angleBetween
 
 class Quantity:
-    def __init__(self, value, unit=Unit(), name=''):
+    def __init__(self, value, unit=Unit(), name='', uncertainty=0):
         if type(unit) == Quantity: unit = Unit(unit=unit.unit.unit, unitname=unit.unit.unitname, unitfunc=unit.unit.unitfunc, mul=unit.unit.mul*unit.value, add=unit.unit.add)
         elif type(unit) != Unit: unit = Unit(unit)
 
@@ -27,11 +27,14 @@ class Quantity:
 
         if isnumeric(value): value = convert(value)
 
-        self.val, self.value = convert((convert(value) * unit.mul) + unit.add), convert(value)
+        self.value = convert(value)
+        self.val = convert(self.value * unit.mul) + unit.add
         self.unit = unit
         self.name = str(name)
         self.vals = []
         self.func = None
+        self.uncertain = convert(abs(uncertainty))
+        self.uncertainty = convert(self.uncertain * unit.mul) + unit.add
 
     def __str__(self): return (str(self.val) + bool(self.unit)*f" {self.unit}").strip()
     def __repr__(self):
@@ -43,58 +46,58 @@ class Quantity:
 
     def __add__(self, other):
         if isnumeric(other):
-            return Quantity(self.value+convert(other), self.unit)
+            return Quantity(self.value+convert(other), self.unit, uncertainty=self.uncertain)
         if check(other, Quantity):
             if str(self.unit) == str(other.unit):
-                return Quantity(self.value+other.value, self.unit)
+                return Quantity(self.val+other.val, Unit(str(self.unit)), uncertainty=self.uncertainty+other.uncertainty)
 
     def __radd__(self, other):
         if isnumeric(other):
-            return Quantity(self.value+convert(other), self.unit)
+            return Quantity(self.value+convert(other), self.unit, uncertainty=self.uncertain)
         if check(other, Quantity):
             if str(self.unit) == str(other.unit):
-                return Quantity(self.value+other.value, self.unit)
+                return Quantity(self.val+other.val, Unit(str(self.unit)), uncertainty=self.uncertainty+other.uncertainty)
 
     def __sub__(self, other):
         if isnumeric(other):
-            return Quantity(self.value-convert(other), self.unit)
+            return Quantity(self.value-convert(other), self.unit, uncertainty=self.uncertain)
         if check(other, Quantity):
             if str(self.unit) == str(other.unit):
-                return Quantity(self.value-other.value, self.unit)
+                return Quantity(self.val-other.val, Unit(str(self.unit)), uncertainty=self.uncertainty+other.uncertainty)
 
     def __rsub__(self, other):
         if isnumeric(other):
-            return Quantity(convert(other)-self.value, self.unit)
+            return Quantity(convert(other)-self.value, self.unit, uncertainty=self.uncertain)
         if check(other, Quantity):
             if str(self.unit) == str(other.unit):
-                return Quantity(other.value-self.value, other.unit)
+                return Quantity(other.val-self.val, Unit(str(self.unit)), uncertainty=self.uncertainty+other.uncertainty)
 
     def __mul__(self, other):
         if isnumeric(other):
             return Quantity(self.value*convert(other), self.unit)
         if check(other, Quantity):
-            return Quantity(self.value*other.value, self.unit*other.unit)
+            return Quantity(self.value*other.value, self.unit*other.unit, self.value*other.uncertain+self.uncertain*other.value)
 
     def __rmul__(self, other):
         if isnumeric(other):
             return Quantity(self.value*convert(other), self.unit)
         if check(other, Quantity):
-            return Quantity(self.value*other.value, self.unit*other.unit)
+            return Quantity(self.value*other.value, self.unit*other.unit, self.value*other.uncertain+self.uncertain*other.value)
 
     def __truediv__(self, other):
         if isnumeric(other):
             return Quantity(self.value/convert(other), self.unit)
         if check(other, Quantity):
-            return Quantity(self.value/other.value, self.unit/other.unit)
+            return Quantity(self.value/other.value, self.unit/other.unit, self.value*other.uncertain+self.uncertain*other.value)
 
     def __rtruediv__(self, other):
         if isnumeric(other):
             return Quantity(convert(other)/self.value, 1/self.unit)
         if check(other, Quantity):
-            return Quantity(other.value/self.value, other.unit/self.unit)
+            return Quantity(other.value/self.value, other.unit/self.unit, self.value*other.uncertain+self.uncertain*other.value)
 
     def __pow__(self, other):
-        if isnumeric(other): return Quantity(self.value**convert(other), self.unit**other)
+        if isnumeric(other): return Quantity(self.value**convert(other), self.unit**other, other * self.uncertain * self.value**(other-1))
 
     def addvalue(self, val, name='', unit=None):
         if unit is None: unit = self.unit
