@@ -303,7 +303,7 @@ class Torque(BaseVectorClass):
         if type(other) == Time: return AngularImpulse(self.x*other, self.y*other, self.z*other)
 
     def __div__(self, other):
-        if type(other) == Inertia: return AngularAcceleration(self.x/float(other), self.y/float(other), self.z/float(other)
+        if type(other) == Inertia: return AngularAcceleration(self.x/float(other), self.y/float(other), self.z/float(other))
 
 
 
