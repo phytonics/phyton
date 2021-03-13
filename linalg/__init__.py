@@ -199,6 +199,10 @@ class ArgandVector(SpatialVector):
     def conjugate(self):
         return ArgandVector(self.real, -self.complex)
 
+    @property
+    def polarCoordinate(self):
+        return ArgandVector(self.real, -self.complex)
+
     def dot(self, other):
         if check(other, SpatialVector):
             return self.x * other.x + self.y * other.y + self.z * other.z
