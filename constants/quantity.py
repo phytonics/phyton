@@ -118,6 +118,10 @@ class Quantity:
     def mag(self):
         return self.unit(self.value.mag)
 
+    @property
+    def arg(self):
+        return rad(self.value.arg)
+
     def __call__(self, *args, **kwargs):
         if self.func: return self.func(*args, **kwargs)
         else:
