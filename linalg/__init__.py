@@ -85,6 +85,10 @@ class SpatialVector:
     def unitVector(self):
         return self / self.mag
 
+    @property
+    def arg(self):
+        return self.angleFrom(SpatialVector(1))
+
     def __len__(self):
         if self.z == 0 and self.y == 0: return 1
         if self.z == 0: return 2
