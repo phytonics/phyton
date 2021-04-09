@@ -38,7 +38,7 @@ class Quadratic:
                 else: self.examples[y] = [x]
 
             a, h = symbols('a h')
-            iter(self.examples)[0] =
+            # iter(self.examples)[0] =
             # y = a(x-h)**2 + k
             self.examples[y][0]
 
