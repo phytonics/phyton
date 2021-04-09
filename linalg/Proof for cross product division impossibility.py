@@ -19,6 +19,9 @@ Therefore, this divCross does not work.
 
 # code:
 import np
+from numpy.linalg import det
+from phyton.linalg import SpatialVector
+
 def _divCross(self, other):
     """
     |u x v| = |u||v|sin(theta)
