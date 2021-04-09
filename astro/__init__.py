@@ -14,4 +14,4 @@ class Sun(_SolarSystemObject):
 
 class Planet(_SolarSystemObject):
     semi_major_axis = 'unknown'
-    sidereal_rotation_period = 
+    # sidereal_rotation_period = 
