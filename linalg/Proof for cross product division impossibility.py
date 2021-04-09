@@ -18,6 +18,7 @@ Therefore, this divCross does not work.
 """
 
 # code:
+import np
 def _divCross(self, other):
     """
     |u x v| = |u||v|sin(theta)
