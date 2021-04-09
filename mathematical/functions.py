@@ -12,7 +12,7 @@ class Range:
         if isinstance(other, Range): return self.__contains__(other.min) and self.__contains__(other.max)
         if isinstance(other, Iterable):
             for i in other:
-                if !self.__contains__(i): return False
+                if not self.__contains__(i): return False
             return True
         if isInstance(other, complex) and self.real: return True;
         if isInstance(other, int) and self.integer: return False;
