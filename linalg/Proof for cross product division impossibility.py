@@ -12,7 +12,7 @@ A = [
 
 a, e, i = 0
 
-other.z(other.x * other.y) - other.y(other.x * other.z) = 0
+other.z(other.x * other.y) - other.y(other.x * other.z) = 0  --> det will always be zero.
 
 Therefore, this divCross does not work.
 """
