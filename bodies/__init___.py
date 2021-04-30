@@ -102,11 +102,12 @@ class RigidBody:
     def KE(self):
         return 0.5*self.p*self.v
 
-Earth = Location()
-m = Mass(68.0)
-Prannaya = SoftBody(m, Earth, m*Earth.g)
-print('vi = ', Prannaya.v)
-print('hi = ', Earth.h)
-print('a = ', Prannaya.a)
-Prannaya.timepass(Time(3))
-print(Prannaya.v, Earth.h, sep='\n')
+if __name__ == "__main__":
+    Earth = Location()
+    m = Mass(68.0)
+    Prannaya = SoftBody(m, Earth, m*Earth.g)
+    print('vi = ', Prannaya.v)
+    print('hi = ', Earth.h)
+    print('a = ', Prannaya.a)
+    Prannaya.timepass(Time(3))
+    print(Prannaya.v, Earth.h, sep='\n')
