@@ -27,7 +27,7 @@ class Range:
 
 Z = Range(integer=True)
 Zplus = Range(min=0, integer=True)
-Zminus = Range(max=0, integer=False)
+Zminus = Range(max=0, integer=True)
 
 R = Range()
 Rplus = Range(min=0)
