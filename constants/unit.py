@@ -90,6 +90,9 @@ class Unit:
                     cnt -= 1
                     ogden = ogden.replace(u, '', 1)
                 powers[u] += cnt
+
+        if powers["m"] != 0: powers["rad"] = 0
+        
         for u, p in powers.items():
             if p == 0: continue
             elif p == 1: numer += u
