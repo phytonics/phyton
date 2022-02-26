@@ -6,6 +6,7 @@ from inspect import getmro as inspect
 import np
 from phyton.linalg import *
 from collections.abc import Iterable
+import re
 
 def angleBetween(self, other):
     if check(other, SpatialVector) and check(self, SpatialVector):
@@ -99,16 +100,20 @@ class Quantity:
     def __pow__(self, other):
         if isnumeric(other): return Quantity(self.value**convert(other), self.unit**other, other * self.uncertain * self.value**(other-1))
 
-    def addvalue(self, val, name='', unit=None):
+    def addvalue(self, val, name='', unit=None, attr=""):
         if unit is None: unit = self.unit
         if isnumeric(val):
             val = Quantity(convert(val), unit)
         elif check(val, SpatialVector):
             val = Quantity(convert(val), unit)
         elif check(val, Quantity):
+            if not name: name = val.name
             val = Quantity(val.val, unit)
 
         self.vals.append((val, name))
+
+        if re.match(r"[A-Za-z][A-Za-z0-9_]*", attr): exec(f"self.{attr} = Quantity(convert({val.val}), unit='{val.unit}', name='{name}')")
+
         return self
 
     def setfunc(self, func):

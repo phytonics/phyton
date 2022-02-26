@@ -166,8 +166,31 @@ def gfs(φ=Quantity(45, deg)):
 def multiplier(n):
     return lambda multiple=1: multiple * n
 
+def power(n):
+    return lambda power=1: n**power
+
 def _cFunc(times, n = 1):
-    return times * (c / n)
+    mul = times / n
+    mulc = mul * c
+    mulc.name = "{0:.3f} * {1}".format(mul, c.name)
+    
+    mulc.addvalue(mul, "Beta, v/c", unit="", attr="beta")
+    mulc.addvalue(1 / (1-mul**2)**0.5, "Lorentz Factor", unit="", attr="gamma")
+    mulc.addvalue((1-mul**2)**0.5, "Reciprocal of Lorentz Factor", unit="", attr="alpha")
+
+    mulc.beta.addvalue(mulc, mulc.name, unit=mulc.unit, attr="vel")
+    mulc.beta.addvalue(mulc.gamma, mulc.gamma.name, unit="", attr="gamma")
+    mulc.beta.addvalue(mulc.alpha, mulc.alpha.name, unit="", attr="alpha")
+
+    mulc.gamma.addvalue(mulc, mulc.name, unit=mulc.unit, attr="vel")
+    mulc.gamma.addvalue(mulc.beta, mulc.beta.name, unit="", attr="beta")
+    mulc.gamma.addvalue(mulc.alpha, mulc.alpha.name, unit="", attr="alpha")
+
+    mulc.alpha.addvalue(mulc, mulc.name, unit=mulc.unit, attr="vel")
+    mulc.alpha.addvalue(mulc.beta, mulc.beta.name, unit="", attr="beta")
+    mulc.alpha.addvalue(mulc.gamma, mulc.gamma.name, unit="", attr="gamma")
+
+    return mulc
 
 def _exp(x=1, n=None):
     euler = math.e if n is None else (1 + 1/n)**n
@@ -198,20 +221,20 @@ def _pi(d=1, iters=None):
 
 
 # Fill up
-e.setfunc(_exp)
-e.exp = _exp
+e.setfunc(power(e))
+e.approx = _exp
 
-pi.setfunc(_pi)
-pi.my = _pi
+pi.setfunc(multiplier(n))
+pi.approx = _pi
 
 
-g.addvalue(G*ME/(RE**2), 'GM/R^2').addvalue(9.764, 'Minimum g at the Earth Surface').addvalue(9.834, 'Maximum g at the Earth Surface').addvalue(9.81, 'School g Constant').addvalue(9.80, 'SJPO g Constant').addvalue(10, 'Secondary School g Constant')
-g.addvalue(9.832, 'Gravitational Field Strength at poles').addvalue(9.806, 'Gravitational Field Strength at φ = 45°').addvalue(9.780, 'Gravitational Field Strength at equator')
+g.addvalue(G*ME/(RE**2), 'GM/R^2', attr="approx").addvalue(9.764, 'Minimum g at the Earth Surface', attr="min").addvalue(9.834, 'Maximum g at the Earth Surface', attr="max").addvalue(9.78033, "Normal Equatorial g on Earth", attr="n")
+g.addvalue(9.832, 'Gravitational Field Strength at poles', attr="poles").addvalue(9.806, 'Gravitational Field Strength at φ = 45°').addvalue(9.780, 'Gravitational Field Strength at equator', attr="equator")
 g.setfunc(gfs)
 g.gfs = gfs
 
 
-k.addvalue(1/(4*pi*ε0), '1/4πε0').addvalue(9e9, 'AP Constant')
+k.addvalue(1/(4*pi*ε0), '1/4πε0').addvalue(9e9, 'Approximated Value for Coulomb\'s Constant', attr="approx")
 
 kB.addvalue(R/NA, "R/A")
 
@@ -220,10 +243,17 @@ kB.addvalue(R/NA, "R/A")
 ε0.addvalue(1/(4*pi*k), '1/4πk')
 mu0.addvalue(pi * 4.0e-7, "4.0πe-7", T*m/A)
 
-c.addvalue(3.0e8, "Approximated Speed of Light")
+c.addvalue(3.0e8, "Approximated Speed of Light", attr="approx").addvalue(1/(mu0 * epsilon0)**0.5, "1/sqrt(μ0ε0)", attr="vacuum")
 c.setfunc(_cFunc)
 
-mach.addvalue(331, "Speed of Sound at 0℃").addvalue(343, "Speed of Sound at 20℃")
-mach.setfunc(multiplier(mach))
+def _alteredMach(n=1, T=degC(0)):
+    if isnumeric(T): T = degC(T)
+    speed = 331.5 * (1+((T.val-273.15) / 273.15))**0.5
+    alteredMach = Quantity(n*speed, unit=mach.unit, name=(f"{n:.3f} * " if n-1 else "")+f"Speed of Sound at {T.val.real-273.15} °C")
+    alteredMach.addvalue(T, "Temperature", unit="K", attr=temp)
+    return alteredMach
+
+mach.addvalue(331, "Speed of Sound at 0℃", attr="stp").addvalue(343, "Speed of Sound at 20℃", attr="rtp")
+mach.setfunc(_alteredMach)
 
 qe.setfunc(multiplier(qe)) # Quantization of Charges
