@@ -39,11 +39,13 @@ class Quantity:
 
     def __str__(self): return (str(self.val) + bool(self.unit)*f" {self.unit}").strip()
     def __repr__(self):
-        s = bool(self.name)*f"{self.name} = " + str(self)
+        length = max([len(i[-1]) for i in self.vals]+[len(self.name)])
+        s = (f'%{length}s' % self.name.strip())*bool(self.name) + " = "+str(self)
+        #s = bool(self.name)*f"{self.name} = " + str(self)
         for i in self.vals:
-            s += '\n'+(f'%{len(self.name)}s' % i[-1])*bool(self.name) + ' = '+str(i[0])
+            s += '\n'+(f'%{length}s' % i[-1])*bool(self.name) + ' = '+str(i[0])
             #s += '\n'+' '*(bool(self.name)*len(f"{self.name}")) + bool(self.name)*' = '+str(i)
-        return s.strip()
+        return s.rstrip()
 
     def __add__(self, other):
         if isnumeric(other):
@@ -112,7 +114,7 @@ class Quantity:
 
         self.vals.append((val, name))
 
-        if re.match(r"[A-Za-z][A-Za-z0-9_]*", attr): exec(f"self.{attr} = Quantity(convert({val.val}), unit='{val.unit}', name='{name}')")
+        if re.match(r"[A-Za-z][A-Za-z0-9_]*", attr): exec(f"self.{attr} = Quantity(convert({val.val}), unit='{val.unit}', name=\"{name}\")")
 
         return self
 

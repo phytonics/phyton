@@ -29,7 +29,7 @@ def totalE(v, m0):
 	return restE(meff(m0, v))
 
 def p(v, m0):
-	return beta(v) * E / c
+	return beta(v) * totalE(v, m0) / c
 
 
 def betaFromContraction(factor):

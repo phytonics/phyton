@@ -224,7 +224,7 @@ def _pi(d=1, iters=None):
 e.setfunc(power(e))
 e.approx = _exp
 
-pi.setfunc(multiplier(n))
+pi.setfunc(multiplier(pi))
 pi.approx = _pi
 
 
@@ -234,7 +234,7 @@ g.setfunc(gfs)
 g.gfs = gfs
 
 
-k.addvalue(1/(4*pi*ε0), '1/4πε0').addvalue(9e9, 'Approximated Value for Coulomb\'s Constant', attr="approx")
+k.addvalue(1/(4*pi*ε0), '1/4πε0').addvalue(9e9, "Approximated Value for Coulomb's Constant", attr="approx")
 
 kB.addvalue(R/NA, "R/A")
 
@@ -257,3 +257,5 @@ mach.addvalue(331, "Speed of Sound at 0℃", attr="stp").addvalue(343, "Speed of
 mach.setfunc(_alteredMach)
 
 qe.setfunc(multiplier(qe)) # Quantization of Charges
+
+AU.setfunc(multiplier(AU))

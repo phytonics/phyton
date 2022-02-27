@@ -67,8 +67,8 @@ class Unit:
             # numerator
             for u in self.SIs:
                 cnt = 0
-                while re.search(u+"\^[0-9.]+", ognum):
-                    match = re.search(u+"\^[0-9.]+", ognum)
+                while re.search(u+r"\^[0-9.]+", ognum):
+                    match = re.search(u+r"\^[0-9.]+", ognum)
                     cnt += eval(match.group()[len(u)+1:])
                     ognum = ognum[:match.start()] + ognum[match.end():]
 
@@ -81,8 +81,8 @@ class Unit:
             # denominator
             for u in self.SIs:
                 cnt = 0
-                while re.search(u+"\^[0-9.]+", ogden):
-                    match = re.search(u+"\^[0-9.]+", ogden)
+                while re.search(u+r"\^[0-9.]+", ogden):
+                    match = re.search(u+r"\^[0-9.]+", ogden)
                     cnt -= eval(match.group()[len(u)+1:])
                     ogden = ogden[:match.start()] + ogden[match.end():]
 
